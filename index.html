@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OKINAWA TRAVEL GUIDE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Zen+Maru+Gothic:wght@700&family=Noto+Sans+TC:wght@300;400;700&family=Zen+Old+Mincho:wght@400;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sage: '#87a3a3',
+                        morandi: '#7d9696',
+                        cream: '#f4f1ea',
+                        teal: '#2c4a4a',
+                        clay: '#b88a76',
+                        bg: '#fdfdfd',
+                        slate_bg: '#f1f5f9'
+                    },
+                    fontFamily: {
+                        title_en: ['Playfair Display', 'serif'],
+                        title_jp: ['Zen Maru Gothic', 'sans-serif'],
+                        body_tw: ['Noto Sans TC', 'sans-serif'],
+                        body_jp: ['Zen Old Mincho', 'serif'],
+                        num: ['Ubuntu', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --sage-green: #87a3a3;
+            --morandi-green: #7d9696;
+            --cream: #f4f1ea;
+            --deep-teal: #2c4a4a;
+            --clay: #b88a76;
+        }
+
+        body {
+            background-color: #fdfdfd;
+            color: var(--deep-teal);
+            font-family: 'Noto Sans TC', sans-serif;
+            padding-bottom: 120px; /* Space for bottom nav */
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-btn-active {
+            color: var(--sage-green);
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-scale:active {
+            transform: scale(0.92);
+            transition: transform 0.1s ease;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .checked-item {
+            color: #94a3b8;
+            text-decoration: line-through;
+        }
+
+        /* Timeline Node */
+        .node-outer {
+            width: 14px;
+            height: 14px;
+            border: 2px solid #829b9b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+        .node-inner {
+            width: 6px;
+            height: 6px;
+            background: #829b9b;
+            border-radius: 50%;
+        }
+
+        /* 新增樣式：隱藏導航列專用 */
+        .hide-nav {
+            display: none !important;
+        }
+
+    </style>
+</head>
+<body>
+
+<!--首頁-->
+    <div id="home" class="page active">
+        <!--封面圖-->
+        <div class="relative w-full h-[35vh] overflow-visible"> <img src="https://i.meee.com.tw/cvaObZw.jpg" class="w-full h-full object-cover object-center" alt="Okinawa">
+            <div class="absolute inset-0 bg-[#87a3a366] flex flex-col items-center justify-center text-white">
+                <h1 class="font-title_jp text-6xl font-bold tracking-[0.1em]">沖繩</h1>
+                <p class="font-title_en text-sm tracking-[0.4em] mt-2">OKINAWA</p>
+            </div>
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-10/12 bg-white/95 backdrop-blur-md rounded-full py-3 px-6 shadow-lg text-center z-20">
+                <p class="font-body_jp italic text-[11px] text-teal">APRIL 24 - APRIL 27, 2026</p>
+            </div>
+        </div>
+        <!--導覽按鈕-->
+        <div class="px-8 mt-12 grid grid-cols-3 gap-4 mb-20">
+            <div onclick="showPage('flight')" class="bg-white rounded-[20px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-plane text-sage text-2xl mb-3"></i>
+                <span class="text-[10px] font-bold tracking-widest text-teal">FLIGHT</span>
+            </div>
+            <div onclick="showPage('hotel')" class="bg-white rounded-[20px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-hotel text-sage text-2xl mb-3"></i>
+                <span class="text-[10px] font-bold tracking-widest text-teal">HOTEL</span>
+            </div>
+            <div onclick="showPage('traffic')" class="bg-white rounded-[20px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-train-subway text-sage text-2xl mb-3"></i>
+                <span class="text-[10px] font-bold tracking-widest text-teal">TRAFFIC</span>
+            </div>
+            <div onclick="showPage('spot')" class="bg-white rounded-[20px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-map-location-dot text-sage text-2xl mb-3"></i>
+                <span class="text-[10px] font-bold tracking-widest text-teal">SPOT</span>
+            </div>
+            <div onclick="showPage('dining')" class="bg-white rounded-[20px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-utensils text-sage text-2xl mb-3"></i>
+                <span class="text-[10px] font-bold tracking-widest text-teal">DINING</span>
+            </div>
+            <div onclick="showPage('shopping')" class="bg-white rounded-[20px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-bag-shopping text-sage text-2xl mb-3"></i>
+                <span class="text-[10px] font-bold tracking-widest text-teal">SHOPPING</span>
+            </div>
+            <div onclick="showPage('prep')" class="col-span-2 h-[110px] bg-white rounded-[20px] shadow-md flex items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-clipboard-list text-sage text-2xl mr-3"></i>
+                <span class="text-[10px] font-bold tracking-widest text-teal">PREPARATION</span>
+            </div>
+            <a href="https://weather.yahoo.co.jp/weather/jp/47/9110.html" target="_blank" class="bg-white rounded-[20px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-cloud-sun text-sage text-2xl mb-3"></i>
+                <span class="text-[10px] font-bold tracking-widest text-teal">WEATHER</span>
+            </a>
+        </div>
+
+    </div>
+
+<!--FLIGHT分頁-->
+    <div id="flight" class="page px-6 pt-10">
+        <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center text-teal">FLIGHT</h2>
+        <!--去程卡片-->
+        <div class="relative bg-white rounded-[24px] card-shadow border-l-8 border-sage p-6 mb-6 overflow-hidden">
+            <div class="absolute top-5 right-6">
+                <span class="font-num text-xs text-slate-400 font-medium">2026/04/24（五）</span>
+            </div>
+
+            <div class="inline-block bg-sage/10 text-sage px-2 py-1 text-[9px] font-bold mb-6" style="border-radius: 0;">
+                DEPARTURE
+            </div>
+
+            <div class="mb-5 text-left">
+                <p class="text-lg text-teal font-body_tw font-bold tracking-tight">長榮航空 BR112</p>
+            </div>
+
+            <div class="flex justify-between items-end px-1">
+                <div class="flex-1 text-left">
+                    <p class="text-2xl font-num font-medium text-teal leading-none">06:45</p>
+                    <p class="text-[10px] text-slate-400 mt-2 font-body_tw tracking-tight">桃園機場第二航廈</p>
+                </div>
+                
+                <div class="flex-shrink-0 px-4 pb-1">
+                    <i class="fa-solid fa-plane text-sage opacity-30 text-xs"></i>
+                </div>
+
+                <div class="flex-1 text-right">
+                    <p class="text-2xl font-num font-medium text-teal leading-none">09:45</p>
+                    <p class="text-[10px] text-slate-400 mt-2 font-body_tw tracking-tight">那霸機場國際航廈</p>
+                </div>
+            </div>
+        </div>
+        <!--回程卡片-->
+        <div class="relative bg-white rounded-[24px] card-shadow border-l-8 border-sage p-6 mb-6 overflow-hidden">
+            <div class="absolute top-5 right-6">
+                <span class="font-num text-xs text-slate-400 font-medium">2026/04/27（一）</span>
+            </div>
+
+            <div class="inline-block bg-sage/10 text-sage px-2 py-1 text-[9px] font-bold mb-6" style="border-radius: 0;">
+                RETURN
+            </div>
+
+            <div class="mb-5 text-left">
+                <p class="text-lg text-teal font-body_tw font-bold tracking-tight">長榮航空 BR113</p>
+            </div>
+
+            <div class="flex justify-between items-end px-1">
+                <div class="flex-1 text-left">
+                    <p class="text-2xl font-num font-medium text-teal leading-none">10:15</p>
+                    <p class="text-[10px] text-slate-400 mt-2 font-body_tw tracking-tight">那霸機場國際航廈</p>
+                </div>
+                
+                <div class="flex-shrink-0 px-4 pb-1">
+                    <i class="fa-solid fa-plane text-sage opacity-30 text-xs rotate-180"></i>
+                </div>
+
+                <div class="flex-1 text-right">
+                    <p class="text-2xl font-num font-medium text-teal leading-none">10:55</p>
+                    <p class="text-[10px] text-slate-400 mt-2 font-body_tw tracking-tight">桃園機場第二航廈</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--HOTEL分頁-->
+    <div id="hotel" class="page px-6 pt-10 pb-20">
+    
+        <div class="mb-6 overflow-hidden rounded-[24px] shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+            <img src="https://i.meee.com.tw/YKFIiyA.jpg" 
+             alt="Hotel View" class="w-full h-[200px] object-cover">
+        </div>
+
+        <div class="mb-6 text-center">
+            <h2 class="text-xl font-bold text-teal font-body_jp">ホテル ストレータ 那覇</h2>
+            <p class="text-sm text-sage font-title_en tracking-widest mt-1">HOTEL STRATA NAHA</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-[24px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] text-xs space-y-4 mb-8 border border-slate-50">
+            <p><strong>預約編號：</strong>?????</p>
+            <p><strong>電話號碼：</strong>098-860-7400</p>
+            <p><strong>所在地：</strong>〒900-0013 沖縄県那覇市牧志１丁目１９番８號</p>
+        
+            <div class="flex justify-between border-t pt-4">
+                <div>
+                    <p class="text-slate-400">Check-In</p>
+                    <p class="font-bold text-base text-teal">15:00</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-slate-400">Check-Out</p>
+                    <p class="font-bold text-base text-teal">11:00</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="overflow-hidden rounded-[24px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-50">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3579.3162070684994!2d127.68446770000001!3d26.218913300000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34e56979a852bb81%3A0xac832270fd961442!2sSTRATA%20Naha!5e0!3m2!1szh-TW!2stw!4v1772925114465!5m2!1szh-TW!2stw"
+                width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            </div>
+    </div>
+
+<!--SPOT分頁-->
+    <div id="spot" class="page pt-10 px-4">
+        <h2 class="font-title_en text-3xl tracking-widest mb-6 text-center">SPOT</h2>
+        
+        <!--日期選擇標籤-->
+        <div class="flex overflow-x-auto hide-scrollbar space-x-3 mb-8 px-2">
+            <button onclick="switchDay(1)" id="tab-day1" class="day-tab active px-6 py-2 rounded-full bg-sage text-white shadow-sm flex-shrink-0 text-[10px] font-bold">DAY 1</button>
+            <button onclick="switchDay(2)" id="tab-day2" class="day-tab px-6 py-2 rounded-full bg-slate_bg text-slate-400 flex-shrink-0 text-[10px]">DAY 2</button>
+            <button onclick="switchDay(3)" id="tab-day3" class="day-tab px-6 py-2 rounded-full bg-slate_bg text-slate-400 flex-shrink-0 text-[10px]">DAY 3</button>
+            <button onclick="switchDay(4)" id="tab-day4" class="day-tab px-6 py-2 rounded-full bg-slate_bg text-slate-400 flex-shrink-0 text-[10px]">DAY 4</button>
+        </div>
+
+        <div id="itinerary-content">
+
+            <!--第1天-->
+            <div id="day1-content" class="day-content">
+                <!--第1個行程：那覇空港→美栄橋-->
+                <div class="bg-slate_bg rounded-[24px] p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">那覇空港</span>
+                        </div>
+                        <span class="text-slate-400 text-xs font-num tracking-widest uppercase">Departure</span>
+                    </div>
+        
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-8 my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm">
+                            <div>
+                                <p class="text-xs text-slate-400 font-bold">ゆいレール單軌列車．てだこ浦西行</p>
+                                <p class="text-[11px] text-slate-500 font-num mt-1">車資 ¥320</p>
+                            </div>
+                            <a href="https://reurl.cc/NN5NR6" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-route text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">美栄橋</span>
+                        </div>
+                        <span class="text-slate-400 text-xs font-num tracking-widest uppercase">Arrival</span>
+                    </div>
+
+                    <div class="ml-[2.2rem] mt-1">
+                        <button onclick="toggleGuide('transit-guide-1')" 
+                                class="inline-flex items-center border border-slate-300 text-slate-500 px-2 py-0.5 rounded-lg text-[10px] font-bold btn-scale transition-all bg-white/50" >
+                            <i class="fa-solid fa-circle-info mr-1.5 text-[11px]"></i>
+                            乘車指南
+                        </button>
+                    </div>
+
+                    <div id="transit-guide-1" class="hidden">
+                        <div class="ml-[2.2rem] mt-3 border-t border-dashed border-slate-300"></div>
+
+                        <div class="ml-[2.2rem] mt-4 space-y-5">
+                            <div>
+                                <h4 class="text-[12px] font-bold text-teal mb-1">Step 1：跨越航廈(國際線➔國內線)</h4>
+                                <p class="text-[11px] text-slate-500 leading-relaxed">
+                                    抵達大廳後，跟著「國內線航站」指標前進。室內連通道步行約5–8分鐘。
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="text-[12px] font-bold text-teal mb-1">Step 2：垂直移動(前往2樓)</h4>
+                                <p class="text-[11px] text-slate-500 leading-relaxed">
+                                    搭乘電扶梯前往2樓，跟著天花板藍色「モノレール」標誌走。
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="text-[12px] font-bold text-teal mb-1">Step 3：穿越天橋(國內線➔那霸空港站)</h4>
+                                <p class="text-[11px] text-slate-500 leading-relaxed">
+                                    從國內線航廈2樓「出口2」出去，沿著天橋步行約2分鐘即可抵達。
+                                </p>
+                                <div class="flex items-start mt-2 text-teal font-bold">
+                                    <span class="w-1 h-1 bg-sage rounded-full mt-1.5 mr-2"></span>
+                                    <span class="text-[11px]">售票機購買單軌電車一日券1,000日幣</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+
+                <!--第2個行程：飯店Check-In-->
+                <div class="bg-morandi rounded-[24px] p-6 mb-6 text-white shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">飯店 Check-In</h3>
+                    </div>
+                    <p class="text-xs opacity-90 leading-relaxed font-body_tw">
+                        正式 check in 時間 15:00 後
+                    </p>
+                </div>
+
+                <!--第2個行程：波上宮-->
+                <div class="bg-morandi rounded-[24px] p-6 mb-6 text-white shadow-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">波上宮</h3>
+                        <a href="https://maps.app.goo.gl/ekgch29f51J6o7hDA" class="bg-white text-morandi px-3 py-1 rounded-md text-[10px] font-bold">MAP</a>
+                    </div>
+                    <p class="text-xs opacity-90 leading-relaxed font-body_tw">
+                        從旭橋站徒步約16min<br>
+                        朱印初穗料 ¥300<br>
+                        9:00 ~ 16:30
+                    </p>
+                </div>
+
+                <!--第2個行程：波上宮-->
+                <div class="bg-morandi rounded-[24px] p-6 mb-6 text-white shadow-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">首里城公園</h3>
+                        <a href="https://maps.app.goo.gl/fCUtHYgBpon3qMR59" class="bg-white text-morandi px-3 py-1 rounded-md text-[10px] font-bold">MAP</a>
+                    </div>
+                    <p class="text-xs opacity-90 mb-4">門票 ¥400 / 8:30~19:00</p>
+                    <button onclick="toggleGuide('guide1')" class="border border-white/40 w-full py-2 rounded-xl text-[10px] font-bold">深度介紹</button>
+                    <div id="guide1" class="hidden mt-4 text-[11px] leading-relaxed border-t border-white/20 pt-4">
+                        首里城是琉球王國的象徵。若持單軌電車一日券可享團體票優惠 ¥320。
+                    </div>
+                </div>
+            </div>
+            
+            <!--第2天-->
+            <div id="day2-content" class="day-content hidden text-center py-20 text-slate-400 italic">行程待補...</div>
+            <!--第3天-->
+            <div id="day3-content" class="day-content hidden text-center py-20 text-slate-400 italic">行程待補...</div>
+            <!--第4天-->
+            <div id="day4-content" class="day-content hidden">
+                <div class="bg-slate_bg rounded-[24px] p-6 mb-6 border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold">美栄橋</span>
+                        </div>
+                        <span class="text-slate-400 text-xs font-num">07:30</span>
+                    </div>
+                    
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-8 my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center">
+                            <div>
+                                <p class="text-xs text-slate-400">ゆいレール單軌列車</p>
+                                <p class="text-xs text-slate-500 font-num">車資 ¥320</p>
+                            </div>
+                            <i class="fa-solid fa-train-subway text-sage opacity-30"></i>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold">那覇空港</span>
+                        </div>
+                        <span class="text-slate-400 text-xs font-num">07:46</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--DINING分頁-->
+    <div id="dining" class="page px-6 pt-10">
+        <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center">DINING</h2>
+        
+        <div class="bg-white rounded-[24px] overflow-hidden card-shadow mb-6 flex h-40">
+            <img src="https://i.ibb.co/chBZPSLx/image.jpg" class="w-1/3 object-cover">
+            <div class="w-2/3 p-4 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-sm text-teal leading-tight">氾濫バーガー チムフガス</h3>
+                    <p class="text-[10px] text-slate-400 mt-1">11:00-21:00</p>
+                    <div class="mt-2">
+                        <span class="inline-block bg-cream text-clay px-2 py-0.5 rounded text-[9px] font-bold">漢堡</span>
+                    </div>
+                </div>
+                <a href="https://maps.app.goo.gl/PQtYDgNTfAbdmLWF7" class="text-sage text-[10px] font-bold flex items-center">
+                    <i class="fa-solid fa-location-arrow mr-1"></i> GOOGLE MAPS
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-[24px] overflow-hidden card-shadow mb-6 flex h-40">
+            <img src="https://i.ibb.co/tMm1QTfZ/by-The-Shrimp.jpg" class="w-1/3 object-cover">
+            <div class="w-2/3 p-4 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-sm text-teal leading-tight">by・The・Shrimp</h3>
+                    <p class="text-[10px] text-slate-400 mt-1">11:00-21:00</p>
+                    <div class="mt-2">
+                        <span class="inline-block bg-cream text-clay px-2 py-0.5 rounded text-[9px] font-bold">蝦蝦飯</span>
+                    </div>
+                </div>
+                <a href="https://maps.app.goo.gl/vvF882RWQdLgpPFh7" class="text-sage text-[10px] font-bold flex items-center">
+                    <i class="fa-solid fa-location-arrow mr-1"></i> GOOGLE MAPS
+                </a>
+            </div>
+        </div>
+    </div>
+
+<!--SHOPPING分頁-->
+    <div id="shopping" class="page px-6 pt-10">
+        <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center">SHOPPING</h2>
+        <div class="bg-white rounded-[24px] p-6 card-shadow mb-8">
+            <h3 class="text-xs font-bold text-slate-400 tracking-widest mb-4">CHECKLIST</h3>
+            <div class="space-y-4" id="shopping-list">
+                <div class="flex items-center">
+                    <input type="checkbox" id="shop-1" class="w-5 h-5 rounded border-slate-300 text-sage focus:ring-sage" onchange="handleCheck(this)">
+                    <label for="shop-1" class="ml-3 text-sm font-body_tw">美妝/保養品</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="shop-2" class="w-5 h-5 rounded border-slate-300 text-sage focus:ring-sage" onchange="handleCheck(this)">
+                    <label for="shop-2" class="ml-3 text-sm font-body_tw">當地零食</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--PREPARATION分頁-->
+    <div id="prep" class="page px-6 pt-10">
+        <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center">PREPARATION</h2>
+        <div class="bg-white rounded-[24px] p-6 card-shadow">
+            <div class="space-y-4" id="prep-list">
+                <div class="flex items-center">
+                    <input type="checkbox" id="prep-1" class="w-5 h-5 rounded border-slate-300 text-sage focus:ring-sage" onchange="handleCheck(this)">
+                    <label for="prep-1" class="ml-3 text-sm font-body_tw">護照與機票列印</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="prep-2" class="w-5 h-5 rounded border-slate-300 text-sage focus:ring-sage" onchange="handleCheck(this)">
+                    <label for="prep-2" class="ml-3 text-sm font-body_tw">日幣現金</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="prep-3" class="w-5 h-5 rounded border-slate-300 text-sage focus:ring-sage" onchange="handleCheck(this)">
+                    <label for="prep-3" class="ml-3 text-sm font-body_tw">網路卡/eSIM</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--TRAFFIC分頁-->
+    <div id="traffic" class="page px-6 pt-10 pb-20">
+    <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center text-teal">TRAFFIC</h2>
+
+    <div class="bg-white rounded-[24px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] p-6 mb-8 border-l-8 border-sage">
+        <h3 class="text-lg font-bold text-teal mb-3 flex items-center">
+            <i class="fa-solid fa-train-subway text-sage mr-3"></i>沖繩單軌電車Yuirail
+        </h3>
+        <ul class="space-y-2 text-[12px] text-slate-600 mb-4">
+            <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>從那霸機場到 Tedako 浦西站共 19 站</span></li>
+            <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>列車僅有 2、3 節車廂，早晚尖峰時段攜帶大型行李搭乘較為擁擠</span></li>
+        </ul>
+        <button onclick="toggleGuide('monorail-ticket')" class="w-full border border-sage text-sage py-2 text-[11px] font-bold btn-scale transition-all" style="border-radius: 0;">一日券資訊</button>
+        <div id="monorail-ticket" class="hidden mt-4 pt-4 border-t border-slate-100 space-y-2 text-[12px] text-slate-600">
+            <div class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>費用：1,000日圓</span></div>
+            <div class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>可於售票機直接購得</span></div>
+            <div class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>購票起24小時內有效</span></div>
+            <div class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>適用於全區間，可不限次數搭乘</span></div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-[24px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] p-6 mb-8 border-l-8 border-sage">
+        <h3 class="text-lg font-bold text-teal mb-3 flex items-center">
+            <i class="fa-solid fa-bus text-sage mr-3"></i>琉球バス/那覇バス/沖縄バス
+        </h3>
+        <ul class="space-y-2 text-[12px] text-slate-600">
+            <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>後門上車、前門下車</span></li>
+            <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>上車時從車門旁的票券機領取整理券，下車時將現金與乘車券一併投入收費箱</span></li>
+        </ul>
+    </div>
+
+    <div class="bg-white rounded-[24px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] p-6 mb-8 border-l-8 border-sage">
+        <h3 class="text-lg font-bold text-teal mb-3 flex items-center">
+            <i class="fa-solid fa-bus text-sage mr-3"></i>東京バス．ROUTE BUS
+        </h3>
+        <ul class="space-y-2 text-[12px] text-slate-600">
+            <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>無法使用交通系IC卡</span></li>
+            <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>後門上車、前門下車</span></li>
+            <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>上車時領取整理券，下車時將整理券與現金一併投入運費箱</span></li>
+            <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>信用卡支付於上車及下車時，皆需感應讀卡機</span></li>
+        </ul>
+    </div>
+
+    <div class="bg-white rounded-[24px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] overflow-hidden border border-slate-50">
+        <div class="grid grid-cols-6 bg-slate-50 p-3 text-[9px] font-bold text-slate-400 uppercase text-center border-b border-slate-100">
+            <div class="col-span-2">路線/交通</div>
+            <div>OKICA</div>
+            <div>Suica</div>
+            <div>信用卡</div>
+            <div>線上</div>
+        </div>
+
+        <div class="grid grid-cols-6 p-3 text-[10px] text-teal border-b border-slate-50 items-center text-center font-medium">
+            <div class="col-span-2 text-left font-bold">單軌</div>
+            <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+            <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+            <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+            <div class="text-slate-200">-</div>
+        </div>
+        <div class="grid grid-cols-6 p-3 text-[10px] text-teal border-b border-slate-50 items-center text-center font-medium">
+            <div class="col-span-2 text-left font-bold">路線公車</div>
+            <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+            <div class="text-slate-200">-</div>
+            <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+            <div class="text-slate-200">-</div>
+        </div>
+
+        <div class="grid grid-cols-6 p-3 text-[10px] text-teal border-b border-slate-50 items-center text-center font-medium">
+            <div class="col-span-2 text-left font-bold">TK巴士</div>
+            <div class="text-slate-200">-</div>
+            <div class="text-sage"><i class="fa-solid fa-check"></i>*</div>
+            <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+            <div class="text-slate-200">-</div>
+        </div>
+        <div class="grid grid-cols-6 p-3 text-[10px] text-teal border-b border-slate-50 items-center text-center font-medium">
+            <div class="col-span-2 text-left font-bold">山原急行</div>
+            <div class="text-slate-200">-</div>
+            <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+            <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+            <div class="text-slate-200">-</div>
+        </div>
+        <div class="grid grid-cols-6 p-3 text-[10px] text-teal border-b border-slate-50 items-center text-center font-medium">
+            <div class="col-span-2 text-left font-bold">機場巴士</div>
+            <div class="text-slate-200">-</div>
+            <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+            <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+            <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+        </div>
+        <div class="grid grid-cols-6 p-3 text-[10px] text-teal items-center text-center font-medium">
+            <div class="col-span-2 text-left font-bold">沖繩利木津</div>
+            <div class="text-slate-200">-</div>
+            <div class="text-slate-200">-</div>
+            <div class="text-slate-200">-</div>
+            <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+        </div>
+    </div>
+    
+    <p class="text-[9px] text-slate-400 mt-4 px-2 italic">* Suica不適用TK01、TK02。</p>
+</div>
+
+<!--底部APP導航列-->
+    <nav class="fixed bottom-0 left-0 right-0 glass-nav z-50 px-4 pb-8 pt-4">
+       <div class="grid grid-cols-4 gap-y-4 max-w-md mx-auto">
+            <button onclick="showPage('home')" class="nav-item flex flex-col items-center btn-scale text-slate-300 active" id="btn-home">
+                <i class="fa-solid fa-house text-sm"></i>
+                <span class="text-[8px] mt-1 font-bold uppercase">HOME</span>
+            </button>
+            <button onclick="showPage('flight')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-flight">
+                <i class="fa-solid fa-plane text-sm"></i>
+                <span class="text-[8px] mt-1 font-bold uppercase">FLIGHT</span>
+            </button>
+            <button onclick="showPage('hotel')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-hotel">
+                <i class="fa-solid fa-hotel text-sm"></i>
+                <span class="text-[8px] mt-1 font-bold uppercase">HOTEL</span>
+            </button>
+            <button onclick="showPage('traffic')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-traffic">
+                <i class="fa-solid fa-train text-sm"></i>
+                <span class="text-[8px] mt-1 font-bold uppercase">TRAFFIC</span>
+            </button>
+        
+            <button onclick="showPage('spot')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-spot">
+                <i class="fa-solid fa-map-location-dot text-sm"></i>
+                <span class="text-[8px] mt-1 font-bold uppercase">SPOT</span>
+            </button>
+
+            <button onclick="showPage('dining')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-dining">
+                <i class="fa-solid fa-utensils text-sm"></i>
+                <span class="text-[8px] mt-1 font-bold uppercase">DINING</span>
+            </button>
+            <button onclick="showPage('shopping')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-shopping">
+                <i class="fa-solid fa-bag-shopping text-sm"></i>
+                <span class="text-[8px] mt-1 font-bold uppercase">SHOPPING</span>
+            </button>
+            <button onclick="showPage('prep')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-prep">
+                <i class="fa-solid fa-clipboard-list text-sm"></i>
+                <span class="text-[8px] mt-1 font-bold uppercase">PREP</span>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        // 核心頁面切換邏輯
+        function showPage(pageId) {
+            // 1. 隱藏所有頁面
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // 2. 顯示目標頁面
+            document.getElementById(pageId).classList.add('active');
+            
+            // 3. 底部導航列控制：只有在首頁時隱藏
+            const bottomNav = document.querySelector('.glass-nav');
+            if (pageId === 'home') {
+                bottomNav.classList.add('hide-nav');
+            } else {
+                bottomNav.classList.remove('hide-nav');
+            }
+
+            // 4. 更新導航按鈕激活狀態
+            document.querySelectorAll('.nav-item').forEach(btn => {
+                btn.classList.remove('text-sage');
+                btn.classList.add('text-slate-300');
+            });
+            const activeBtn = document.getElementById('btn-' + pageId);
+            if (activeBtn) {
+                activeBtn.classList.add('text-sage');
+                activeBtn.classList.remove('text-slate-300');
+            }
+
+            // 5. Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Itinerary Day Switching
+        function switchDay(dayNum) {
+            document.querySelectorAll('.day-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById('day' + dayNum + '-content').classList.remove('hidden');
+
+            document.querySelectorAll('.day-tab').forEach(tab => {
+                tab.classList.remove('bg-sage', 'text-white', 'shadow-sm', 'font-bold');
+                tab.classList.add('bg-slate_bg', 'text-slate-400');
+            });
+            const activeTab = document.getElementById('tab-day' + dayNum);
+            if(activeTab) {
+                activeTab.classList.add('bg-sage', 'text-white', 'shadow-sm', 'font-bold');
+                activeTab.classList.remove('bg-slate_bg', 'text-slate-400');
+            }
+        }
+
+        // Toggle Guide
+        function toggleGuide(guideId) {
+            const el = document.getElementById(guideId);
+            el.classList.toggle('hidden');
+        }
+
+        // Checklist Storage Logic
+        function handleCheck(checkbox) {
+            const label = checkbox.nextElementSibling;
+            if (checkbox.checked) {
+                label.classList.add('checked-item');
+            } else {
+                label.classList.remove('checked-item');
+            }
+            saveStatus();
+        }
+
+        function saveStatus() {
+            const checks = document.querySelectorAll('input[type="checkbox"]');
+            const statusMap = {};
+            checks.forEach(c => {
+                statusMap[c.id] = c.checked;
+            });
+            localStorage.setItem('okinawa_checklist', JSON.stringify(statusMap));
+        }
+
+        function loadStatus() {
+            const saved = localStorage.getItem('okinawa_checklist');
+            if (saved) {
+                const statusMap = JSON.parse(saved);
+                for (const id in statusMap) {
+                    const cb = document.getElementById(id);
+                    if (cb) {
+                        cb.checked = statusMap[id];
+                        if (cb.checked) cb.nextElementSibling.classList.add('checked-item');
+                    }
+                }
+            }
+        }
+
+        // Init
+        window.onload = () => {
+            loadStatus();
+            // 初始化時隱藏導航列 (因為預設進入首頁)
+            const bottomNav = document.querySelector('.glass-nav');
+            if(bottomNav) bottomNav.classList.add('hide-nav');
+            
+            // 確保 HOME 按鈕狀態
+            const homeBtn = document.getElementById('btn-home');
+            if(homeBtn) homeBtn.classList.add('text-sage');
+        };
+    </script>
+    
+</body>
+</html>
