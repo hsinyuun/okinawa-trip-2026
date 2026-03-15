@@ -1715,6 +1715,10 @@
                 class="px-5 py-2 rounded-full text-[12px] transition-all duration-300 bg-[#f1f5f9] text-[#94a3b8]">
                 Coupons
             </button>
+            <button onclick="switchTab('snack')" id="btn-snack" 
+                class="px-5 py-2 rounded-full text-[12px] transition-all duration-300 bg-[#f1f5f9] text-[#94a3b8]">
+                Snack
+            </button>
         </div>
 
         <!--藥妝清單分頁-->
@@ -2115,6 +2119,91 @@
             </div>
         </div>
 
+        <!--點心分頁-->
+        <div id="content-snack" class="hidden pb-8">
+            <div id="content-snack" class="grid grid-cols-2 gap-5 p-4 pb-10">
+
+                <div class="bg-white rounded-[20px] overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.08)] border border-slate-50 flex flex-col">
+                    <div class="relative h-40 w-full overflow-hidden">
+                        <img src="https://i.meee.com.tw/RKoas2x.jpg" alt="南風堂辣味蝦餅" class="w-full h-full object-cover">
+                        <div class="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg shadow-sm">
+                            <span class="text-[11px] font-bold text-teal">1188円</span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h3 class="text-[13px] font-bold text-slate-700 leading-tight mb-1">南風堂辣味蝦餅</h3>
+                        <p class="text-[13px] text-slate-400">27入裝</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[20px] overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.08)] border border-slate-50 flex flex-col">
+                    <div class="relative h-40 w-full overflow-hidden">
+                        <img src="https://i.meee.com.tw/vrs04AP.jpg" alt="沖繩限定海帶芽" class="w-full h-full object-cover">
+                        <div class="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg shadow-sm">
+                            <span class="text-[11px] font-bold text-teal">896円</span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h3 class="text-[13px] font-bold text-slate-700 leading-tight mb-1">沖繩限定海帶芽</h3>
+                        <p class="text-[13px] text-slate-400">推薦必買</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[20px] overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.08)] border border-slate-50 flex flex-col">
+                    <div class="relative h-40 w-full overflow-hidden">
+                        <img src="https://i.meee.com.tw/9bjxhbI.jpg" alt="南風堂雪鹽金楚糕" class="w-full h-full object-cover">
+                        <div class="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg shadow-sm">
+                            <span class="text-[11px] font-bold text-teal">1296円</span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h3 class="text-[13px] font-bold text-slate-700 leading-tight mb-1">南風堂雪鹽金楚糕</h3>
+                        <p class="text-[13px] text-slate-400">24袋入</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[20px] overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.08)] border border-slate-50 flex flex-col">
+                    <div class="relative h-40 w-full overflow-hidden">
+                        <img src="https://i.meee.com.tw/pLs4JcW.jpg" alt="福木屋年輪蛋糕" class="w-full h-full object-cover">
+                        <div class="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg shadow-sm">
+                            <span class="text-[11px] font-bold text-teal">1620円</span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h3 class="text-[13px] font-bold text-slate-700 leading-tight mb-1">福木屋年輪蛋糕</h3>
+                        <p class="text-[13px] text-slate-400">精緻甜點</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[20px] overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.08)] border border-slate-50 flex flex-col">
+                    <div class="relative h-40 w-full overflow-hidden">
+                        <img src="https://i.meee.com.tw/40esHbP.jpg" alt="旨鹽餅乾棒" class="w-full h-full object-cover">
+                        <div class="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg shadow-sm">
+                            <span class="text-[11px] font-bold text-teal">100円</span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h3 class="text-[13px] font-bold text-slate-700 leading-tight mb-1">Kabaya旨鹽餅乾棒</h3>
+                        <p class="text-[13px] text-slate-400">沖繩限定口味</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[20px] overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.08)] border border-slate-50 flex flex-col">
+                    <div class="relative h-40 w-full overflow-hidden">
+                        <img src="https://i.meee.com.tw/NjM4yyv.jpg" alt="宮古島雪鹽蝦餅" class="w-full h-full object-cover">
+                        <div class="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg shadow-sm">
+                            <span class="text-[11px] font-bold text-teal">價格詳見店內</span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h3 class="text-[13px] font-bold text-slate-700 leading-tight mb-1">宮古島雪鹽蝦餅</h3>
+                        <p class="text-[13px] text-slate-400">人氣點心</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>        
+
 
     </div>
 
@@ -2366,24 +2455,24 @@
 
         // SHOPPING分頁切換邏輯
         function switchTab(tab) {
-            const cosmeBtn = document.getElementById('btn-cosme');
-            const couponsBtn = document.getElementById('btn-coupons');
-            const cosmeContent = document.getElementById('content-cosme');
-            const couponsContent = document.getElementById('content-coupons');
-
-            if (tab === 'cosme') {
-                cosmeContent.classList.remove('hidden');
-                couponsContent.classList.add('hidden');
-                // 切換按鈕樣式
-                cosmeBtn.className = "px-5 py-2 rounded-full text-[12px] transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.2)] bg-[#87a3a3] text-white";
-                couponsBtn.className = "px-5 py-2 rounded-full text-[12px] transition-all duration-300 bg-[#f1f5f9] text-[#94a3b8]";
-            } else {
-                cosmeContent.classList.add('hidden');
-                couponsContent.classList.remove('hidden');
-                // 切換按鈕樣式
-                couponsBtn.className = "px-5 py-2 rounded-full text-[12px] transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.2)] bg-[#87a3a3] text-white";
-                cosmeBtn.className = "px-5 py-2 rounded-full text-[12px] transition-all duration-300 bg-[#f1f5f9] text-[#94a3b8]";
-            }
+            // 定義分頁名稱陣列
+            const tabs = ['cosme', 'coupons', 'snack'];
+    
+            // 遍歷所有分頁，進行切換
+            tabs.forEach(t => {
+                const btn = document.getElementById(`btn-${t}`);
+                const content = document.getElementById(`content-${t}`);
+        
+                if (t === tab) {
+                    // 顯示當前選中的內容，並設定選中狀態的按鈕樣式
+                    content.classList.remove('hidden');
+                    btn.className = "px-5 py-2 rounded-full text-[12px] transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.2)] bg-[#87a3a3] text-white";
+                } else {
+                    // 隱藏其他內容，並設定未選中狀態的按鈕樣式
+                    content.classList.add('hidden');
+                    btn.className = "px-5 py-2 rounded-full text-[12px] transition-all duration-300 bg-[#f1f5f9] text-[#94a3b8]";
+                }
+            });
         }
 
     </script>
