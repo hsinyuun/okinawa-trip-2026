@@ -217,7 +217,7 @@
     </div>
 
 <!--FLIGHT分頁-->
-    <div id="flight" class="page px-6 pt-10 pb-8">
+    <div id="flight" class="page px-6 pt-6 pb-8">
         <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center text-teal">Flight</h2>
         <!--去程卡片-->
         <div class="relative bg-white rounded-[15px] card-shadow border-l-8 border-sage p-6 mb-6 overflow-hidden">
@@ -282,7 +282,7 @@
     </div>
 
 <!--HOTEL分頁-->
-    <div id="hotel" class="page px-6 pt-10 pb-8">
+    <div id="hotel" class="page px-6 pt-6 pb-8">
     
         <div class="mb-6 overflow-hidden rounded-[15px] shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
             <img src="https://i.meee.com.tw/YKFIiyA.jpg" 
@@ -319,13 +319,19 @@
     </div>
 
 <!--TRAFFIC分頁-->
-    <div id="traffic" class="page px-6 pt-10 pb-8">
+    <div id="traffic" class="page px-6 pt-6 pb-8">
         <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center text-teal">Traffic</h2>
 
         <div class="bg-white rounded-[15px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] p-6 mb-8 border-l-8 border-sage">
             <h3 class="text-lg font-bold text-teal mb-3 flex items-center">
                 <i class="fa-solid fa-train-subway text-sage mr-3"></i>沖繩單軌電車Yuirail
             </h3>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-2 py-0.5 bg-[#dff4f2] text-sage text-[11px] rounded">現金</span>
+                <span class="px-2 py-0.5 bg-[#dff4f2] text-sage text-[11px] rounded">IC交通卡</span>
+                <span class="px-2 py-0.5 bg-[#dff4f2] text-sage text-[11px] rounded">信用卡感應</span>
+                <span class="px-2 py-0.5 bg-[#dff4f2] text-sage text-[11px] rounded">行動支付</span>
+            </div>
             <ul class="space-y-2 text-[14px] text-slate-600 mb-4">
                 <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>從那霸機場到 Tedako 浦西站共 19 站</span></li>
                 <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>列車僅有 2、3 節車廂，早晚尖峰時段攜帶大型行李搭乘較為擁擠</span></li>
@@ -343,6 +349,11 @@
             <h3 class="text-lg font-bold text-teal mb-3 flex items-center">
                 <i class="fa-solid fa-bus text-sage mr-3"></i>琉球バス/那覇バス/沖縄バス
             </h3>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-2 py-0.5 bg-[#dff4f2] text-sage text-[11px] rounded">現金</span>
+                <span class="px-2 py-0.5 bg-[#dff4f2] text-sage text-[11px] rounded">OKICA</span>
+                <span class="px-2 py-0.5 bg-[#dff4f2] text-sage text-[11px] rounded">信用卡感應</span>
+            </div>            
             <ul class="space-y-2 text-[14px] text-slate-600">
                 <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>後門上車、前門下車</span></li>
                 <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>上車時從車門旁的票券機領取整理券，下車時將現金與乘車券一併投入收費箱</span></li>
@@ -353,6 +364,11 @@
             <h3 class="text-lg font-bold text-teal mb-3 flex items-center">
                 <i class="fa-solid fa-bus text-sage mr-3"></i>東京バス．ROUTE BUS
             </h3>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-2 py-0.5 bg-[#dff4f2] text-sage text-[11px] rounded">現金</span>
+                <span class="px-2 py-0.5 bg-[#dff4f2] text-sage text-[11px] rounded">信用卡感應</span>
+                <span class="px-2 py-0.5 bg-[#dff4f2] text-sage text-[11px] rounded">行動支付</span>
+            </div>            
             <ul class="space-y-2 text-[14px] text-slate-600">
                 <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>無法使用交通系IC卡</span></li>
                 <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>後門上車、前門下車</span></li>
@@ -419,7 +435,7 @@
     </div>
 
 <!--SPOT分頁-->
-    <div id="spot" class="page pt-10 px-4">
+    <div id="spot" class="page pt-6 px-4">
         <h2 class="font-title_en text-3xl tracking-widest mb-6 text-center">Spot</h2>
         
         <!--日期選擇標籤-->
@@ -938,7 +954,7 @@
                     <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
                         <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
                             <div>
-                                <p class="text-sm text-slate-400 font-bold">琉球バス交通５４前川線<br>那覇バスターミナル行</p>
+                                <p class="text-sm text-slate-400 font-bold">琉球バス５４前川線<br>那覇バスターミナル行</p>
                                 <p class="text-sm text-slate-500 font-num mt-1">9月台發車</p>
                                 <p class="text-sm text-slate-500 font-num mt-1">車資 ¥670</p>
                             </div>
@@ -1071,7 +1087,7 @@
                     <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
                         <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
                             <div>
-                                <p class="text-sm text-slate-400 font-bold">琉球バス交通８３玉泉洞線<br>国際線旅客ターミナル前行</p>
+                                <p class="text-sm text-slate-400 font-bold">琉球バス８３玉泉洞線<br>国際線旅客ターミナル前行</p>
                                 <p class="text-sm text-slate-500 font-num mt-1">車資 ¥780</p>
                             </div>
                             <a href="https://reurl.cc/3b8bOj" target="_blank" class="text-sage btn-scale">
@@ -1102,7 +1118,7 @@
                     <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
                         <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm">
                             <div>
-                                <p class="text-sm text-slate-400 font-bold">連絡バス東京バスウミカジライナー（TK02）<br>琉球ホテル＆リゾート名城ビーチ行</p>
+                                <p class="text-sm text-slate-400 font-bold">東京バスTK02<br>琉球ホテル行</p>
                                 <p class="text-sm text-slate-500 font-num mt-1">那覇空港1階バス乗り場(6)</p>
                                 <p class="text-sm text-slate-500 font-num mt-1">車資 ¥250</p>
                             </div>
@@ -1201,7 +1217,7 @@
                     <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
                         <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm">
                             <div>
-                                <p class="text-sm text-slate-400 font-bold">連絡バス東京バスウミカジライナー（TK02）<br>国際通り入口行</p>
+                                <p class="text-sm text-slate-400 font-bold">東京バスTK02<br>国際通り入口行</p>
                                 <p class="text-sm text-slate-500 font-num mt-1">車資 ¥250</p>
                             </div>
                             <a href="https://reurl.cc/zK2KAQ" target="_blank" class="text-sage btn-scale">
@@ -1343,7 +1359,7 @@
                     <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
                         <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
                             <div>
-                                <p class="text-sm text-slate-400 font-bold">琉球バス交通沖縄バス２８読谷線<br>読谷バスターミナル行</p>
+                                <p class="text-sm text-slate-400 font-bold">沖縄バス２８読谷線<br>読谷バスターミナル行</p>
                                 <p class="text-sm text-slate-500 font-num mt-1">3月台發車</p>
                                 <p class="text-sm text-slate-500 font-num mt-1">車資 ¥840</p>
                             </div>
@@ -1441,7 +1457,7 @@
                     <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
                         <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
                             <div>
-                                <p class="text-sm text-slate-400 font-bold">琉球バス交通沖縄バス１２０名護西空港線<br>国際線旅客ターミナル前行</p>
+                                <p class="text-sm text-slate-400 font-bold">沖縄バス１２０名護西空港線<br>国際線旅客ターミナル前行</p>
                                 <p class="text-sm text-slate-500 font-num mt-1">車資 ¥530</p>
                             </div>
                             <a href="https://reurl.cc/oKNK55" target="_blank" class="text-sage btn-scale">
@@ -1508,7 +1524,7 @@
                     <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
                         <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
                             <div>
-                                <p class="text-sm text-slate-400 font-bold">琉球バス交通沖縄バス２９読谷線<br>那覇バスターミナル行</p>
+                                <p class="text-sm text-slate-400 font-bold">沖縄バス２９読谷線<br>那覇バスターミナル行</p>
                                 <p class="text-sm text-slate-500 font-num mt-1">車資 ¥520</p>
                             </div>
                             <a href="https://reurl.cc/3b8beM" target="_blank" class="text-sage btn-scale">
@@ -1612,7 +1628,7 @@
     </div>
 
 <!--DINING分頁-->
-    <div id="dining" class="page px-6 pt-10 space-y-4 pb-8">
+    <div id="dining" class="page px-6 pt-6 space-y-4 pb-8">
         <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center">Dining</h2>
         
         <!--氾濫漢堡-->
@@ -1741,7 +1757,7 @@
     </div>
 
 <!--SHOPPING分頁-->
-    <div id="shopping" class="page px-6 pt-10">
+    <div id="shopping" class="page px-6 pt-6">
         <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center">Shopping</h2>
 
         <!--頂部標籤列-->
@@ -2158,7 +2174,7 @@
     </div>
 
 <!--PREPARATION分頁-->
-    <div id="prep" class="page px-6 pt-10 pb-8">
+    <div id="prep" class="page px-6 pt-6 pb-8">
         <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center">Preparation</h2>
         
         <!--List-->
