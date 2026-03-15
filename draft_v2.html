@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OKINAWA TRAVEL GUIDE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Zen+Maru+Gothic:wght@700&family=Noto+Sans+TC:wght@300;400;700&family=Zen+Old+Mincho:wght@400;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sage: '#87a3a3',
+                        morandi: '#7d9696',
+                        cream: '#f4f1ea',
+                        teal: '#2c4a4a',
+                        clay: '#b88a76',
+                        bg: '#fdfdfd',
+                        slate_bg: '#f1f5f9'
+                    },
+                    fontFamily: {
+                        title_en: ['Ubuntu', 'serif'],
+                        title_jp: ['Zen Maru Gothic', 'sans-serif'],
+                        body_tw: ['Noto Sans TC', 'sans-serif'],
+                        body_jp: ['Zen Old Mincho', 'serif'],
+                        num: ['Ubuntu', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --sage-green: #87a3a3;
+            --morandi-green: #7d9696;
+            --cream: #f4f1ea;
+            --deep-teal: #2c4a4a;
+            --clay: #b88a76;
+        }
+
+        body {
+            background-color: #fdfdfd;
+            color: var(--deep-teal);
+            font-family: 'Noto Sans TC', sans-serif;
+            padding-bottom: 120px; /* Space for bottom nav */
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-btn-active {
+            color: var(--sage-green);
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-scale:active {
+            transform: scale(0.92);
+            transition: transform 0.1s ease;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .checked-item {
+            color: #94a3b8;
+            text-decoration: line-through;
+        }
+
+        /* Timeline Node */
+        .node-outer {
+            width: 14px;
+            height: 14px;
+            border: 2px solid #829b9b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+        .node-inner {
+            width: 6px;
+            height: 6px;
+            background: #829b9b;
+            border-radius: 50%;
+        }
+
+        /* 新增樣式：隱藏導航列專用 */
+        .hide-nav {
+            display: none !important;
+        }
+
+        /* 新增樣式：DAY分頁控制專用 */
+        .hide-day { 
+            display: none !important; 
+        }
+
+        
+
+        /* SHOPPING分頁購物清單勾選框基礎樣式 */
+        .custom-checkbox {
+            background-color: transparent;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* SHOPPING分頁購物清單勾選後樣式：底色變色與打勾呈現 */
+        .custom-checkbox:checked {
+            background-color: #87a3a3;
+            border-color: #87a3a3;
+        }
+
+        /* SHOPPING分頁購物清單中間打勾符號 (使用 Unicode 勾號) */
+        .custom-checkbox::before {
+            content: '✓';
+            color: transparent; /* 預設透明 */
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* SHOPPING分頁購物清單 */
+        /* 勾選時的符號顏色 */
+        /* 注意：您要求打勾顏色為透明，這會讓它隱形；若您是想讓勾線為白色，請改為 color: white; */
+        .custom-checkbox:checked::before {
+            color: #ebebeb; 
+        }
+
+        /* SHOPPING分頁購物清單勾選後，後方的文字顏色與刪除線 */
+        .custom-checkbox:checked + label {
+            color: #9facbf;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+
+<!--首頁-->
+    <div id="home" class="page active">
+        <!--封面圖-->
+        <div class="relative w-full h-[35vh] overflow-visible"> <img src="https://i.meee.com.tw/cvaObZw.jpg" class="w-full h-full object-cover object-center" alt="Okinawa">
+            <div class="absolute inset-0 bg-[#87a3a366] flex flex-col items-center justify-center text-white">
+                <h1 class="font-title_jp text-6xl font-bold tracking-[0.1em]">沖繩</h1>
+                <p class="font-title_en text-[19.2px] tracking-[0.4em] mt-2">OKINAWA</p>
+            </div>
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-10/12 bg-white/95 backdrop-blur-md rounded-full py-3 px-6 shadow-lg text-center z-20">
+                <p class="font-body_jp italic text-[12px] text-teal">APRIL 24 - APRIL 27, 2026</p>
+            </div>
+        </div>
+        <!--導覽按鈕-->
+        <div class="px-8 mt-12 grid grid-cols-3 gap-4 mb-20">
+            <div onclick="showPage('flight')" class="bg-white rounded-[15px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-plane text-sage text-2xl mb-3"></i>
+                <span class="text-[12px] font-bold tracking-widest text-teal">FLIGHT</span>
+            </div>
+            <div onclick="showPage('hotel')" class="bg-white rounded-[15px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-hotel text-sage text-2xl mb-3"></i>
+                <span class="text-[12px] font-bold tracking-widest text-teal">HOTEL</span>
+            </div>
+            <div onclick="showPage('traffic')" class="bg-white rounded-[15px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-train-subway text-sage text-2xl mb-3"></i>
+                <span class="text-[12px] font-bold tracking-widest text-teal">TRAFFIC</span>
+            </div>
+            <div onclick="showPage('spot')" class="bg-white rounded-[15px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-map-location-dot text-sage text-2xl mb-3"></i>
+                <span class="text-[12px] font-bold tracking-widest text-teal">SPOT</span>
+            </div>
+            <div onclick="showPage('dining')" class="bg-white rounded-[15px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-utensils text-sage text-2xl mb-3"></i>
+                <span class="text-[12px] font-bold tracking-widest text-teal">DINING</span>
+            </div>
+            <div onclick="showPage('shopping')" class="bg-white rounded-[15px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-bag-shopping text-sage text-2xl mb-3"></i>
+                <span class="text-[12px] font-bold tracking-widest text-teal">SHOPPING</span>
+            </div>
+            <div onclick="showPage('prep')" class="bg-white rounded-[15px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-clipboard-list text-sage text-2xl mb-3"></i>
+                <span class="text-[12px] font-bold tracking-widest text-teal">PREPARE</span>
+            </div>
+            <a href="https://weather.yahoo.co.jp/weather/jp/47/9110.html" target="_blank" class="bg-white rounded-[15px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-cloud-sun text-sage text-2xl mb-3"></i>
+                <span class="text-[12px] font-bold tracking-widest text-teal">WEATHER</span>
+            </a>
+            <a href="https://www.google.com/maps/d/u/0/edit?mid=1uWbgFhexlwN1KA38NJlc1crTYswd0as&usp=sharing" target="_blank" class="bg-white rounded-[15px] shadow-md h-[110px] flex flex-col items-center justify-center btn-scale cursor-pointer border border-slate-50">
+                <i class="fa-solid fa-signs-post text-sage text-2xl mb-3"></i>
+                <span class="text-[12px] font-bold tracking-widest text-teal">MY MAP</span>
+            </a>
+        </div>
+
+    </div>
+
+<!--FLIGHT分頁-->
+    <div id="flight" class="page px-6 pt-10 pb-8">
+        <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center text-teal">Flight</h2>
+        <!--去程卡片-->
+        <div class="relative bg-white rounded-[15px] card-shadow border-l-8 border-sage p-6 mb-6 overflow-hidden">
+            <div class="absolute top-5 right-6">
+                <span class="font-num text-xs text-slate-400 font-medium">2026/04/24（五）</span>
+            </div>
+
+            <div class="inline-block bg-sage/10 text-sage px-2 py-1 text-[12px] font-bold mb-6" style="border-radius: 0;">
+                DEPARTURE
+            </div>
+
+            <div class="mb-5 text-left">
+                <p class="text-lg text-teal font-body_tw font-bold tracking-tight">長榮航空 BR112</p>
+            </div>
+
+            <div class="flex justify-between items-end px-1">
+                <div class="flex-1 text-left">
+                    <p class="text-2xl font-num font-medium text-teal leading-none">06:45</p>
+                    <p class="text-[12px] text-slate-400 mt-2 font-body_tw tracking-tight">桃園機場第二航廈</p>
+                </div>
+                
+                <div class="flex-shrink-0 px-4 pb-1">
+                    <i class="fa-solid fa-plane text-sage opacity-30 text-xs"></i>
+                </div>
+
+                <div class="flex-1 text-right">
+                    <p class="text-2xl font-num font-medium text-teal leading-none">09:45</p>
+                    <p class="text-[12px] text-slate-400 mt-2 font-body_tw tracking-tight">那霸機場國際航廈</p>
+                </div>
+            </div>
+        </div>
+        <!--回程卡片-->
+        <div class="relative bg-white rounded-[15px] card-shadow border-l-8 border-sage p-6 mb-6 overflow-hidden">
+            <div class="absolute top-5 right-6">
+                <span class="font-num text-xs text-slate-400 font-medium">2026/04/27（一）</span>
+            </div>
+
+            <div class="inline-block bg-sage/10 text-sage px-2 py-1 text-[12px] font-bold mb-6" style="border-radius: 0;">
+                RETURN
+            </div>
+
+            <div class="mb-5 text-left">
+                <p class="text-lg text-teal font-body_tw font-bold tracking-tight">長榮航空 BR113</p>
+            </div>
+
+            <div class="flex justify-between items-end px-1">
+                <div class="flex-1 text-left">
+                    <p class="text-2xl font-num font-medium text-teal leading-none">10:15</p>
+                    <p class="text-[12px] text-slate-400 mt-2 font-body_tw tracking-tight">那霸機場國際航廈</p>
+                </div>
+                
+                <div class="flex-shrink-0 px-4 pb-1">
+                    <i class="fa-solid fa-plane text-sage opacity-30 text-xs rotate-180"></i>
+                </div>
+
+                <div class="flex-1 text-right">
+                    <p class="text-2xl font-num font-medium text-teal leading-none">10:55</p>
+                    <p class="text-[12px] text-slate-400 mt-2 font-body_tw tracking-tight">桃園機場第二航廈</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--HOTEL分頁-->
+    <div id="hotel" class="page px-6 pt-10 pb-8">
+    
+        <div class="mb-6 overflow-hidden rounded-[15px] shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+            <img src="https://i.meee.com.tw/YKFIiyA.jpg" 
+             alt="Hotel View" class="w-full h-[200px] object-cover">
+        </div>
+
+        <div class="mb-6 text-center">
+            <h2 class="text-xl font-bold text-teal font-body_jp">ホテル ストレータ 那覇</h2>
+            <p class="text-sm text-sage font-title_en tracking-widest mt-1">HOTEL STRATA NAHA</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-[15px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] text-sm space-y-4 mb-8 border border-slate-50">
+            <p><strong>預約編號：</strong>0EMYXPE2</p>
+            <p><strong>電話號碼：</strong>098-860-7400</p>
+            <p><strong>所在地：</strong>〒900-0013 沖縄県那覇市牧志１丁目１９番８號</p>
+        
+            <div class="flex justify-between border-t pt-4">
+                <div>
+                    <p class="text-slate-400">Check-In</p>
+                    <p class="font-bold text-base text-teal">15:00</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-slate-400">Check-Out</p>
+                    <p class="font-bold text-base text-teal">11:00</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="overflow-hidden rounded-[15px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-50">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3579.3162070684994!2d127.68446770000001!3d26.218913300000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34e56979a852bb81%3A0xac832270fd961442!2sSTRATA%20Naha!5e0!3m2!1szh-TW!2stw!4v1772925114465!5m2!1szh-TW!2stw"
+                width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            </div>
+    </div>
+
+<!--TRAFFIC分頁-->
+    <div id="traffic" class="page px-6 pt-10 pb-8">
+        <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center text-teal">Traffic</h2>
+
+        <div class="bg-white rounded-[15px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] p-6 mb-8 border-l-8 border-sage">
+            <h3 class="text-lg font-bold text-teal mb-3 flex items-center">
+                <i class="fa-solid fa-train-subway text-sage mr-3"></i>沖繩單軌電車Yuirail
+            </h3>
+            <ul class="space-y-2 text-[14px] text-slate-600 mb-4">
+                <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>從那霸機場到 Tedako 浦西站共 19 站</span></li>
+                <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>列車僅有 2、3 節車廂，早晚尖峰時段攜帶大型行李搭乘較為擁擠</span></li>
+            </ul>
+            <button onclick="toggleGuide('monorail-ticket')" class="w-full border border-sage text-sage py-2 text-[13px] font-bold btn-scale transition-all" style="border-radius: 0;">一日券資訊</button>
+            <div id="monorail-ticket" class="hidden mt-4 pt-4 border-t border-slate-100 space-y-2 text-[14px] text-slate-600">
+                <div class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>費用：1,000日圓</span></div>
+                <div class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>可於售票機直接購得</span></div>
+                <div class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>購票起24小時內有效</span></div>
+                <div class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>適用於全區間，可不限次數搭乘</span></div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-[15px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] p-6 mb-8 border-l-8 border-sage">
+            <h3 class="text-lg font-bold text-teal mb-3 flex items-center">
+                <i class="fa-solid fa-bus text-sage mr-3"></i>琉球バス/那覇バス/沖縄バス
+            </h3>
+            <ul class="space-y-2 text-[14px] text-slate-600">
+                <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>後門上車、前門下車</span></li>
+                <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>上車時從車門旁的票券機領取整理券，下車時將現金與乘車券一併投入收費箱</span></li>
+            </ul>
+        </div>
+
+        <div class="bg-white rounded-[15px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] p-6 mb-8 border-l-8 border-sage">
+            <h3 class="text-lg font-bold text-teal mb-3 flex items-center">
+                <i class="fa-solid fa-bus text-sage mr-3"></i>東京バス．ROUTE BUS
+            </h3>
+            <ul class="space-y-2 text-[14px] text-slate-600">
+                <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>無法使用交通系IC卡</span></li>
+                <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>後門上車、前門下車</span></li>
+                <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>上車時領取整理券，下車時將整理券與現金一併投入運費箱</span></li>
+                <li class="flex items-start"><span class="w-1.5 h-1.5 bg-sage rounded-full mt-1.5 mr-3"></span><span>信用卡支付於上車及下車時，皆需感應讀卡機</span></li>
+            </ul>
+        </div>
+
+        <div class="bg-white rounded-[15px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] overflow-hidden border border-slate-50">
+            <div class="grid grid-cols-6 bg-slate-50 p-3 text-[9px] font-bold text-slate-400 uppercase text-center border-b border-slate-100">
+                <div class="col-span-2">路線/交通</div>
+                <div>OKICA</div>
+                <div>Suica</div>
+                <div>信用卡</div>
+                <div>線上</div>
+            </div>
+
+            <div class="grid grid-cols-6 p-3 text-[10px] text-teal border-b border-slate-50 items-center text-center font-medium">
+                <div class="col-span-2 text-left font-bold">單軌</div>
+                <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+                <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+                <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+                <div class="text-slate-200">-</div>
+            </div>
+            <div class="grid grid-cols-6 p-3 text-[10px] text-teal border-b border-slate-50 items-center text-center font-medium">
+                <div class="col-span-2 text-left font-bold">路線公車</div>
+                <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+                <div class="text-slate-200">-</div>
+                <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+                <div class="text-slate-200">-</div>
+            </div>
+
+            <div class="grid grid-cols-6 p-3 text-[10px] text-teal border-b border-slate-50 items-center text-center font-medium">
+                <div class="col-span-2 text-left font-bold">TK巴士</div>
+                <div class="text-slate-200">-</div>
+                <div class="text-sage"><i class="fa-solid fa-check"></i>*</div>
+                <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+                <div class="text-slate-200">-</div>
+            </div>
+            <div class="grid grid-cols-6 p-3 text-[10px] text-teal border-b border-slate-50 items-center text-center font-medium">
+                <div class="col-span-2 text-left font-bold">山原急行</div>
+                <div class="text-slate-200">-</div>
+                <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+                <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+                <div class="text-slate-200">-</div>
+            </div>
+            <div class="grid grid-cols-6 p-3 text-[10px] text-teal border-b border-slate-50 items-center text-center font-medium">
+                <div class="col-span-2 text-left font-bold">機場巴士</div>
+                <div class="text-slate-200">-</div>
+                <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+                <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+                <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+            </div>
+            <div class="grid grid-cols-6 p-3 text-[10px] text-teal items-center text-center font-medium">
+                <div class="col-span-2 text-left font-bold">沖繩利木津</div>
+                <div class="text-slate-200">-</div>
+                <div class="text-slate-200">-</div>
+                <div class="text-slate-200">-</div>
+                <div class="text-sage"><i class="fa-solid fa-check"></i></div>
+            </div>
+        </div>
+    
+        <p class="text-[9px] text-slate-400 mt-4 px-2 italic">* Suica不適用TK01、TK02。</p>
+    </div>
+
+<!--SPOT分頁-->
+    <div id="spot" class="page pt-10 px-4">
+        <h2 class="font-title_en text-3xl tracking-widest mb-6 text-center">Spot</h2>
+        
+        <!--日期選擇標籤-->
+        <div class="flex overflow-x-auto hide-scrollbar space-x-3 mb-8 px-2">
+            <button onclick="switchDay(1)" id="tab-day1" class="day-tab active px-6 py-2 rounded-full bg-sage text-white shadow-sm flex-shrink-0 text-[12px] font-bold">DAY 1</button>
+            <button onclick="switchDay(2)" id="tab-day2" class="day-tab px-6 py-2 rounded-full bg-slate_bg text-slate-400 flex-shrink-0 text-[12px]">DAY 2</button>
+            <button onclick="switchDay(3)" id="tab-day3" class="day-tab px-6 py-2 rounded-full bg-slate_bg text-slate-400 flex-shrink-0 text-[12px]">DAY 3</button>
+            <button onclick="switchDay(4)" id="tab-day4" class="day-tab px-6 py-2 rounded-full bg-slate_bg text-slate-400 flex-shrink-0 text-[12px]">DAY 4</button>
+        </div>
+
+        <div id="itinerary-content">
+
+            <!--第1天-->
+            <div id="day1-content" class="day-content pb-8">
+                <!--第1個行程：那覇空港→美栄橋-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+    
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">那覇空港</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">Departure</span>
+                    </div>
+                    
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">ゆいレール單軌列車<br>てだこ浦西行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥320</p>
+                            </div>
+                            <a href="https://reurl.cc/NN5NR6" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-train-subway text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">美栄橋</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">Arrival</span>
+                    </div>
+
+                    <div class="ml-[1.6rem] mt-3">
+                        <button onclick="toggleGuide('transit-guide-1')" 
+                            class="inline-flex items-center border border-slate-300 text-slate-500 px-2 py-0.5 rounded-lg text-[13px] font-bold btn-scale transition-all bg-white/50" >
+                            <i class="fa-solid fa-circle-info mr-1.5 text-[13px]"></i>
+                            乘車指南
+                        </button>
+                    </div>
+
+                    <div id="transit-guide-1" class="hidden">
+                        <div class="ml-[1.6rem] mt-3 border-t border-dashed border-slate-300"></div>
+                        <div class="ml-[1.6rem] mt-4 space-y-5">
+                            <div>
+                                <h4 class="text-[14px] font-bold text-teal mb-1">Step 1：跨越航廈(國際線➔國內線)</h4>
+                                <p class="text-[14px] text-slate-500 leading-relaxed">
+                                    抵達大廳後，跟著「國內線航站」指標前進。室內連通道步行約5–8分鐘。
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="text-[14px] font-bold text-teal mb-1">Step 2：垂直移動(前往2樓)</h4>
+                                <p class="text-[14px] text-slate-500 leading-relaxed">
+                                    搭乘電扶梯前往2樓，跟著天花板藍色「モノレール」標誌走。
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="text-[14px] font-bold text-teal mb-1">Step 3：穿越天橋(國內線➔那霸空港站)</h4>
+                                <p class="text-[14px] text-slate-500 leading-relaxed">
+                                    從國內線航廈2樓「出口2」出去，沿著天橋步行約2分鐘即可抵達。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--第2個行程：飯店Check-In-->
+                <div class="bg-morandi rounded-xl p-6 mb-6 text-white shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">飯店 Check-In</h3>
+                    </div>
+                    <p class="text-[14px] opacity-90 leading-relaxed font-body_tw">
+                        正式check in時間 15:00後
+                    </p>
+                </div>
+                
+                <!--第3個行程：美栄橋→旭橋-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+    
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">美栄橋</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">Departure</span>
+                    </div>
+    
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">ゆいレール單軌列車<br>那覇空港行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥250</p>
+                            </div>
+                            <a href="https://reurl.cc/9bdbpO" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-train-subway text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">旭橋</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">Arrival</span>
+                    </div>
+                </div>
+
+                <!--第4個行程：波上宮-->
+                <div class="bg-morandi rounded-xl p-6 mb-6 text-white shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">波上宮</h3>
+                        <a href="https://maps.app.goo.gl/eJxemd4X6JGhx8AQ7" target="_blank" class="bg-white text-morandi px-3 py-1 rounded-md text-[12px] font-bold btn-scale">MAP</a>
+                    </div>
+
+                    <div class="text-[14px] opacity-90 leading-relaxed font-body_tw mb-4">
+                        <div class="flex items-center mb-1">
+                            <i class="fa-regular fa-clock mr-2 w-4 text-center"></i>
+                            <span>9:00 - 16:30</span>
+                        </div>
+                        <div class="flex items-center mb-1">
+                            <i class="fa-solid fa-yen-sign mr-2 w-4 text-center"></i>
+                            <span>朱印初穗料 ¥300</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-person-walking mr-2 w-4 text-center"></i>
+                            <span>旭橋站徒步約 16min</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <button onclick="toggleGuide('naminoue-story')" 
+                                class="inline-flex items-center border border-white/30 text-white/80 px-2 py-0.5 rounded-lg text-[13px] font-bold btn-scale transition-all bg-white/10" >
+                            <i class="fa-solid fa-book-open mr-1.5 text-[13px]"></i>
+                            深度介紹
+                        </button>
+                    </div>
+
+                    <div id="naminoue-story" class="hidden">
+                        <div class="mt-3 border-t border-dashed border-white/20"></div>
+                        
+                        <div class="mt-4 py-2 flex justify-center">
+                            <img src="https://i.meee.com.tw/EDipjWV.jpg" alt="波上宮" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                        </div>
+
+                        <div class="mt-4 text-[14px] leading-[1.8] opacity-80 text-justify space-y-3 font-body_tw">
+                            <p>
+                                波上宮的創立年份已不可考。自古以來，琉球人民深信在大海的彼端存在著一個海神の国的神，並每日向其祈求風調雨順、漁獲豐收與生活平安。
+                            </p>
+                            <p>
+                                坐落於珊瑚礁懸崖之上的「波之上」，自古便是人們朝向大海祭祀的靈驗聖地（拜所），這便是波上宮信仰的起源。
+                            </p>
+                            <p class="italic border-l-2 border-white/30 pl-3 py-1">
+                                關於波上宮的建社，流傳著一段神祕的傳說：往昔在南風原有位名為崎山的里主，每日以捕魚為生。某日他在海邊撿到一顆「會說話的奇石」，從此只要向這顆石祈禱，便能獲得大豐收。
+                            </p>
+                            <p>
+                                諸神聽聞後企圖奪取這顆靈石，里主帶著靈石逃往波上山（現址）時收到神諭：「吾乃熊野權現，應於此地建社供奉，吾必將鎮護國家。」隨即王府下令興建社殿。
+                            </p>
+                            <p>
+                                那霸港曾是與各國貿易的基地。當時的出入船隻都會在海上望向高聳懸崖上的波上宮神殿，出航時祈求平安，歸航時獻上感謝。
+                            </p>
+                            <p>
+                                琉球王府對波上宮信仰深厚，每年正月國王皆會率領百官前來參拜。在設立「琉球八社」制度後，波上宮位居首位，被尊崇為「當國第一之神社」。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--第5個行程：旭橋→首里-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">旭橋</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">Departure</span>
+                    </div>
+    
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">ゆいレール單軌列車<br>てだこ浦西行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥320</p>
+                            </div>
+                            <a href="https://reurl.cc/k848Er" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-train-subway text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">首里</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">Arrival</span>
+                    </div>
+
+                    <div class="ml-[1.6rem] mt-3">
+                        <button onclick="toggleGuide('transit-guide-shuri')" 
+                                class="inline-flex items-center border border-slate-300 text-slate-500 px-2 py-0.5 rounded-lg text-[13px] font-bold btn-scale transition-all bg-white/50" >
+                            <i class="fa-solid fa-circle-info mr-1.5 text-[13px]"></i>
+                            乘車指南
+                        </button>
+                    </div>
+
+                    <div id="transit-guide-shuri" class="hidden">
+                        <div class="ml-[1.6rem] mt-3 border-t border-dashed border-slate-300"></div>
+                        <div class="ml-[1.6rem] mt-4">
+                            <h4 class="text-[14px] font-bold text-teal mb-3">官方推薦路線：</h4>
+                            <div class="text-[14px] text-slate-500 leading-[1.8] space-y-3">
+                                <p>① 出閘門後左轉，從「南出口 (South Exit)」離開車站，下樓梯或搭電梯到地面。</p>
+                                <p>② 沿著馬路直走至第一個大的十字路口「鳥堀 (Torihori)」，過馬路後繼續直行。</p>
+                                <div class="py-2 flex justify-center">
+                                    <img src="https://i.meee.com.tw/lTWCfW8.jpg" alt="首里站導引1" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                                </div>
+                                <p>③ 在前方看到「琉球銀行首里支店」的路口時右轉。</p>
+                                <div class="py-2 flex justify-center">
+                                    <img src="https://i.meee.com.tw/idjwF4C.jpg" alt="首里站導引2" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                                </div>
+                                <p>④ 直走會經過左側的「上之毛公園 (Iinumo Park)」與「首里交番 (警察局)」。</p>
+                                <p>⑤ 繼續直走經過 Lawson 超商，並穿過「當蔵 (Tonokura)」十字路口。此時左手邊會出現龍潭池，這是拍攝首里城遠景的最佳地點。</p>
+                                <div class="py-2 flex justify-center">
+                                    <img src="https://i.meee.com.tw/lCHUnTG.jpg" alt="首里站導引3" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                                </div>
+                                <p>⑥ 經過龍潭池後，在「池端 (Ikehata)」路口左轉，沿坡道向上即可抵達守禮門。</p>
+                                <div class="py-2 flex justify-center">
+                                    <img src="https://i.meee.com.tw/SrssUpl.jpg" alt="首里站導引4" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!--第6個行程：首里城-->
+                <div class="bg-morandi rounded-xl p-6 mb-6 text-white shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">首里城公園</h3>
+                        <a href="https://maps.app.goo.gl/Vnk3Leeh3E32c2DR6" target="_blank" class="bg-white text-morandi px-3 py-1 rounded-md text-[12px] font-bold btn-scale">MAP</a>
+                    </div>
+
+                    <div class="text-[14px] opacity-90 leading-relaxed font-body_tw mb-4">
+                        <div class="flex items-center mb-1">
+                            <i class="fa-regular fa-clock mr-2 w-4 text-center"></i>
+                            <span>8:30 - 19:00</span>
+                        </div>
+                        <div class="flex items-center mb-1">
+                            <i class="fa-solid fa-yen-sign mr-2 w-4 text-center"></i>
+                            <span>入場料金 ¥400 (單軌一日券持有人 ¥320)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-person-walking mr-2 w-4 text-center"></i>
+                            <span>首里站徒步約 14min</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <button onclick="toggleGuide('shuri-castle-story')" 
+                                class="inline-flex items-center border border-white/30 text-white/80 px-2 py-0.5 rounded-lg text-[13px] font-bold btn-scale transition-all bg-white/10" >
+                            <i class="fa-solid fa-book-open mr-1.5 text-[13px]"></i>
+                            深度介紹
+                        </button>
+                    </div>
+
+                    <div id="shuri-castle-story" class="hidden">
+                        <div class="mt-3 border-t border-dashed border-white/20"></div>
+        
+                        <div class="mt-4 text-[14px] leading-[1.6] opacity-80 text-justify space-y-4 font-body_tw">
+                            <style>
+                                /* 懸掛縮排且調整間距：margin-bottom 減小至 2px */
+                                .hanging-list { padding-left: 14px; text-indent: -14px; display: block; margin-bottom: 2px; }
+                                .list-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background-color: rgba(255,255,255,0.6); margin-right: 8px; vertical-align: middle; }
+                            </style>
+
+                            <div class="mb-3">
+                                <div class="py-2 flex justify-center"><img src="https://i.meee.com.tw/57N0oaB.jpg" alt="守禮門" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover"></div>
+                                <p class="font-bold mb-1">1. 守禮門：象徵沖繩的門面</p>
+                                <p class="hanging-list"><span class="list-dot"></span>深厚意涵：匾額書有「守禮之邦」，代表「琉球乃重視禮節之國」。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>別名與詩意：古稱「首里門」，百姓則親暱稱之為「上之綾門」，意指「位於上方最美麗的門」。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>建築特色：融合中國牌樓式風格，氣質高雅，是首里城石牆美學的代表。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>歷史記憶：毀於沖繩戰役，1958年重建，現為2000日圓紀念紙鈔上的經典圖樣。</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="py-2 flex justify-center"><img src="https://i.meee.com.tw/edCZUoh.jpg" alt="園比屋武御嶽石門" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover"></div>
+                                <p class="font-bold mb-1">2. 園比屋武御嶽石門：與神靈對話之處</p>
+                                <p class="hanging-list"><span class="list-dot"></span>參拜之門：以琉球石灰岩打造，並非供人通行，而是國王出巡前祈求平安的神聖參拜所。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>世界遺產：建於1519年，由名匠西塘修造。雖曾毀於戰火，但復原後於2000年被列入世界文化遺產。</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="py-2 flex justify-center"><img src="https://i.meee.com.tw/01yvb4s.jpg" alt="歡會門" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover"></div>
+                                <p class="font-bold mb-1">3. 歡會門：熱情的歡迎之門</p>
+                                <p class="hanging-list"><span class="list-dot"></span>外交門戶：為外城郭的第一道正門，用於迎接中國派往琉球的「冊封使」。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>古語喜悅：別名「Amae御門」，「Amae」在琉球古語中代表「喜悅之事」。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>守護象徵：門兩側安置一對石獅子（Shi-Sa），具驅魔避邪之效。</p>
+                            </div>
+                            <div class="mb-3">
+                                <p class="font-bold mb-1">4. 龍樋與冊封七碑：御用的清泉</p>
+                                <p class="hanging-list"><span class="list-dot"></span>龍之水：出水口的龍雕像來自1523年的中國。此處泉水過去曾作為王宮飲用水，甚至送往「天使館」供使者使用。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>歷史遺痕：周邊設有「冊封七碑」，記錄了歷代使者對清澈泉水的漢詩讚美。現址為依拓本復原的景觀。</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="py-2 flex justify-center"><img src="https://i.meee.com.tw/DicpMQz.jpg" alt="瑞泉門與漏刻門" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover"></div>
+                                <p class="font-bold mb-1">5. 瑞泉門與漏刻門：報時與敬意</p>
+                                <p class="hanging-list"><span class="list-dot"></span>瑞泉門：因緊鄰龍樋清泉而得名，門上的塔樓扁額展現獨特的琉球風情。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>漏刻門（下轎門）：塔樓設有「水鐘」計算時間，報時鼓聲會傳遍城內外。高官至此必須下轎以示對國王的崇敬。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>日影台：位於漏刻門前，是輔助水鐘的日晷，精確測量時間直至廢藩置縣。</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="py-2 flex justify-center"><img src="https://i.meee.com.tw/c0tHRLg.jpg" alt="萬國津梁之鐘" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover"></div>
+                                <p class="font-bold mb-1">6. 萬國津梁之鐘：海洋王國的驕傲</p>
+                                <p class="hanging-list"><span class="list-dot"></span>萬國橋梁：鐘上刻有琉球作為南海之美、擔當各國貿易橋梁的雄心與自豪（現址為複製品）。</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="py-2 flex justify-center"><img src="https://i.meee.com.tw/HpgK1oz.jpg" alt="廣福門與下之御庭" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover"></div>
+                                <p class="font-bold mb-1">7. 廣福門與下之御庭：行政與休憩</p>
+                                <p class="hanging-list"><span class="list-dot"></span>行政中樞：廣福門曾設有寺社座與大與座，現作為售票處。門前可俯瞰龍潭池與蒼翠山景。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>城下庭園：「下之御庭」是通往正殿前的廣場，過去是儀式準備與材料堆放地，現為活動會場。</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="py-2 flex justify-center"><img src="https://i.meee.com.tw/5xXBaR1.jpg" alt="首里森御嶽" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover"></div>
+                                <p class="font-bold mb-1">8. 首里森御嶽：聖地十嶽</p>
+                                <p class="hanging-list"><span class="list-dot"></span>神話聖地：琉球開闢神話中的聖地，曾被吟詠於古老歌謠集『Omorosaushi』之中。</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="py-2 flex justify-center"><img src="https://i.meee.com.tw/j1AxDpF.jpg" alt="西台與京之內" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover"></div>
+                                <p class="font-bold mb-1">9. 西台與京之內：俯瞰與祭祀</p>
+                                <p class="hanging-list"><span class="list-dot"></span>西台（島添台）：海拔130公尺的絕佳展望點，可遠眺那霸港及慶良間群島。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>京之內：首里城的信仰發源地，女神官們在此祈求王室繁榮與五穀豐收。</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="py-2 flex justify-center"><img src="https://i.meee.com.tw/YJ0MYZI.jpg" alt="奉神門" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover"></div>
+                                <p class="font-bold mb-1">10. 奉神門：通往王座的最後屏障</p>
+                                <p class="hanging-list"><span class="list-dot"></span>三道之門：進入正殿御庭的最後門檻。中央門扉僅限國王與冊封使通行，展現嚴謹的身分階級。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>右掖門：曾連通御內原區域，現作為御庭參觀的出口。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>久慶門：過去主要為女性使用的側門，也是國王出巡時常用的出口，旁有「寒水川」湧水。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>繼世門與美福門：東側的外城防禦門，繼世門石碑記載了當年為對抗倭寇而建的歷史。</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="py-2 flex justify-center"><img src="https://i.meee.com.tw/sfxsvGL.jpg" alt="白銀門與寢廟殿" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover"></div>
+                                <p class="font-bold mb-1">11. 白銀門與寢廟殿：幽靜的聖域</p>
+                                <p class="hanging-list"><span class="list-dot"></span>白銀門：獨特的石造屋頂。此門通往安放國王靈柩的「寢廟殿」，氣氛莊嚴神聖。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>寢廟殿：位於御內原最東側的森林中，即使白晝也顯得昏暗。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>東台：海拔140公尺的高台，可俯瞰城外鎮民生活，天氣好時可遠望東方的久高島。</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="py-2 flex justify-center"><img src="https://i.meee.com.tw/x36qI5X.jpg" alt="淑順門與女官居室" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover"></div>
+                                <p class="font-bold mb-1">12. 淑順門與女官居室：內宮生活</p>
+                                <p class="hanging-list"><span class="list-dot"></span>淑順門：官女進入御內原（禁男區域）的專用通道。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>女官：被稱為「城人（Gusukunchu）」，負責國王起居與各種宮廷事務。</p>
+                            </div>
+                            <div class="border-t border-white/20 pt-3 mt-3">
+                            <p class="font-bold text-sm">深度冷知識(小貼士)</p>
+                            <p><span class="list-dot"></span>謙遜的龍爪：龍飾僅有「四爪」。<br>
+                                <span class="list-dot"></span>望向中土：正殿面朝西方，象徵對中國王朝的尊崇。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--第7個行程：玉陵-->
+                <div class="bg-morandi rounded-xl p-6 mb-6 text-white shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">玉陵</h3>
+                        <a href="https://maps.app.goo.gl/rXc3eX5GMqKrE47T6" target="_blank" class="bg-white text-morandi px-3 py-1 rounded-md text-[12px] font-bold btn-scale">MAP</a>
+                    </div>
+
+                    <div class="text-[14px] opacity-90 leading-relaxed font-body_tw mb-4">
+                        <div class="flex items-center mb-1"><i class="fa-regular fa-clock mr-2 w-4 text-center"></i><span>9:00 - 18:00</span></div>
+                        <div class="flex items-center mb-1"><i class="fa-solid fa-yen-sign mr-2 w-4 text-center"></i><span>入場料金 ¥300 (單軌一日券持有人 ¥240)</span></div>
+                        <div class="flex items-center"><i class="fa-solid fa-person-walking mr-2 w-4 text-center"></i><span>守禮門徒步約 5min</span></div>
+                    </div>
+
+                    <div class="mt-2">
+                        <button onclick="toggleGuide('tamaudun-story')" class="inline-flex items-center border border-white/30 text-white/80 px-2 py-0.5 rounded-lg text-[13px] font-bold btn-scale transition-all bg-white/10">
+                            <i class="fa-solid fa-book-open mr-1.5 text-[13px]"></i>深度介紹
+                        </button>
+                    </div>
+
+                    <div id="tamaudun-story" class="hidden">
+                        <div class="mt-3 border-t border-dashed border-white/20"></div>
+                        <div class="mt-4 text-[14px] leading-[1.6] opacity-80 text-justify font-body_tw">
+                            <style>
+                                .hanging-list { padding-left: 14px; text-indent: -14px; display: block; margin-bottom: 2px; }
+                                .list-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background-color: rgba(255,255,255,0.6); margin-right: 8px; vertical-align: middle; }
+                                .nested-list { padding-left: 28px; text-indent: -14px; display: block; margin-bottom: 1px; }
+                                .text-indent-offset { padding-left: 14px; display: block; margin-bottom: 6px; }
+                                .sub-list-dot { display: inline-block; width: 4px; height: 4px; background-color: rgba(255,255,255,0.4); margin-right: 8px; vertical-align: middle; }
+                                .section-title { background-color: #6eb9b5; color: #ffffff; padding: 4px 8px; border-radius: 4px; display: inline-block; font-weight: bold; margin-top: 12px; margin-bottom: 4px; }
+                            </style>
+
+                            <div class="py-2 flex justify-center">
+                                <img src="https://i.meee.com.tw/j1HgUP7.jpg" alt="玉陵外觀" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="section-title">歷史背景：尚真王的赤子之心</div>
+                                <p class="mb-1">玉陵建於1501年，由第二尚氏王朝第三代國王尚真王所築。最初的建立目的是為了改葬其父——開國君主尚円王的遺骨，隨後成為第二尚氏王統的專屬陵墓。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>王朝更迭：琉球歷史上共有兩個尚氏王朝。</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>第一尚氏(1406–1469)：由尚巴志王統一琉球。</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>第二尚氏(1469–1879)：由金丸（即尚円王）建立。玉陵內僅埋葬第二尚氏王室成員。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>文化地位：2000年被列入世界遺產，2018年更正式被指定為日本國寶，是沖繩縣內首件獲得國寶地位的建築物。</p>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="section-title">建築美學：仿首里城的石造殿堂</div>
+                                <p class="mb-1">玉陵的整體構造模仿了當時的板葺屋根宮殿（如首里城），是一座宏偉的石造建築。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>墓室結構：利用天然石灰岩基岩雕刻而成，設有三間彼此獨立的墓室：</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>中室：安置靈柩、進行「洗骨」儀式前的遺體存放空間。</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>東室：專門存放洗骨完成後的國王與王妃遺骨。</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>西室：存放其餘指定的王室家族成員遺骨。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>精湛工藝：墓前石牆設有精美的扶手，上面刻有龍、鳳凰、獅子及蓮花等中式藝術圖案。墓室中央與兩側矗立著石底座獅子像，威嚴地守護王靈。值得注意的是，這些雕像與石碑皆由耐高溫的輝綠岩製成。</p>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="section-title">重要遺址與文物</div>
+                                <p class="hanging-list"><span class="list-dot"></span>玉陵碑</p>
+                                <p class="text-indent-offset">立於1501年，銘文以日本最古老的假名寫成。此碑規定了有權安葬於此的9位王室成員（包含尚真王本人）及其後代，並嚴厲訓誡：若違背此令，必將遭受天譴地罰。碑文中未見長男與次男之名，反映出當時王室內部激烈的勢力鬥爭。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>東之御番所</p>
+                                <p class="text-indent-offset">此處原為管理陵墓的守墓人駐所。在琉球王國時代，每當國王前來祭祖時，這裡也會作為國王的休息場所。</p>
+                                <p class="hanging-list"><span class="list-dot"></span>戰後的重生</p>
+                                <p class="text-indent-offset">玉陵在1945年的沖繩戰役中受損嚴重。1974年起，歷經三年多的精心修復，這座佔地2,442平方公尺的宏大陵墓終於恢復了往昔的莊嚴面貌。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--第8個行程：首里→美栄橋-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">首里</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">Departure</span>
+                    </div>
+
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">ゆいレール單軌列車<br>那覇空港行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥320</p>
+                            </div>
+                            <a href="https://reurl.cc/ZlRlbl" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-train-subway text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">美栄橋</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">Arrival</span>
+                    </div>
+                </div>
+
+
+            </div>
+            
+            <!--第2天-->
+            <div id="day2-content" class="day-content hide-day pb-8">
+                <!--第1個行程：美栄橋→旭橋-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">美栄橋</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">08:17</span>
+                    </div>
+
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">ゆいレール單軌列車<br>那覇空港行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥250</p>
+                            </div>
+                            <a href="https://reurl.cc/ovdZdv" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-train-subway text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">旭橋</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">08:21</span>
+                    </div>
+                </div>
+
+                <!--第2個行程：那覇バスターミナル→玉泉洞前-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">那覇バスターミナル</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">08:35</span>
+                    </div>
+
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">琉球バス交通５４前川線<br>那覇バスターミナル行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">9月台發車</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥670</p>
+                            </div>
+                            <a href="https://reurl.cc/jmXmlM" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-bus text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">玉泉洞前</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">09:14</span>
+                    </div>
+                </div>
+
+                <!--第3個行程：沖繩世界文化王國-->
+                <div class="bg-morandi rounded-xl p-6 mb-6 text-white shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">沖繩世界文化王國</h3>
+                        <a href="https://maps.app.goo.gl/BpbFup9HEvdSEgbM9" target="_blank" class="bg-white text-morandi px-3 py-1 rounded-md text-[12px] font-bold btn-scale">MAP</a>
+                    </div>
+
+                    <div class="text-[14px] opacity-90 leading-relaxed font-body_tw mb-4">
+                        <div class="flex items-center mb-1"><i class="fa-regular fa-clock mr-2 w-4 text-center"></i><span>9:00 - 17:30</span></div>
+                        <div class="flex items-center mb-1"><i class="fa-solid fa-yen-sign mr-2 w-4 text-center"></i><span>入場料金 ¥2000</span></div>
+                        <div class="flex items-center"><i class="fa-solid fa-person-walking mr-2 w-4 text-center"></i><span>守禮門徒步約 5min</span></div>
+                    </div>
+
+                    <div class="mt-2 flex gap-2">
+                        <button onclick="toggleExclusiveGuide('gyokusendo-story', 'kingdom-village-story')" class="inline-flex items-center border border-white/30 text-white/80 px-2 py-0.5 rounded-lg text-[13px] font-bold btn-scale transition-all bg-white/10">
+                            <i class="fa-solid fa-mountain mr-1.5 text-[13px]"></i>玉泉洞
+                        </button>
+                        <button onclick="toggleExclusiveGuide('kingdom-village-story', 'gyokusendo-story')" class="inline-flex items-center border border-white/30 text-white/80 px-2 py-0.5 rounded-lg text-[13px] font-bold btn-scale transition-all bg-white/10">
+                            <i class="fa-solid fa-house-chimney mr-1.5 text-[13px]"></i>琉球王國城下町
+                        </button>
+                    </div>
+
+                    <style>
+                        /* 懸掛縮排：padding-left 是起始縮排，text-indent 是讓第一行負向回推，達成對齊文字頭部 */
+                        .hanging-list { padding-left: 14px; text-indent: -14px; display: block; margin-bottom: 2px; }
+                        .list-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background-color: rgba(255,255,255,0.6); margin-right: 8px; vertical-align: middle; }
+			            .nested-list { padding-left: 28px; text-indent: -14px; display: block; margin-bottom: 1px; }
+                        .sub-list-dot { display: inline-block; width: 4px; height: 4px; background-color: rgba(255,255,255,0.4); margin-right: 8px; vertical-align: middle; }
+                        .section-title { background-color: #6eb9b5; color: #ffffff; padding: 4px 8px; border-radius: 4px; display: inline-block; font-weight: bold; margin-top: 12px; margin-bottom: 4px; }
+                    </style>
+
+                    <div id="gyokusendo-story" class="hidden">
+                        <div class="mt-3 border-t border-dashed border-white/20"></div>
+                        <div class="mt-4 text-[14px] leading-[1.6] opacity-80 text-justify font-body_tw">
+                            <div class="py-2 flex justify-center">
+                                <img src="https://i.meee.com.tw/jRhgM66.jpg" alt="玉泉洞" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                            </div>
+                            <div class="section-title">歷經30萬年的大自然傑作</div>
+                            <p class="mb-3">
+                            在被珊瑚礁海域環繞、亞熱帶島嶼連綿的沖繩，分佈著600多處鐘乳石洞穴。而在這之中，規模最為宏大的便是「玉泉洞」。<br>
+                            這座地底奇觀歷經了長達30萬年的漫長歲月才形成，全長達5,000公尺，擁有的鐘乳石數量超過100萬根，無論是規模還是景觀，皆堪稱日本國內頂尖（目前開放參觀區域為890公尺）。<br>
+                            在文明發達的現代，地表上幾乎每一處角落都已成了人類的日常空間，但在我們的腳下，卻隱藏著一個不可思議的非日常世界。這裡有千姿百態的鐘乳石、靜靜流淌的地下河流，以及迴盪在空谷中的滴水聲。邀請您走入地底，親身體驗這場橫跨萬年、從古至今未曾停歇的時光脈動。</p>
+                            
+                            <div class="section-title">地底世界的奇幻居民</div>
+                            <p class="mb-3">在陽光無法企及的黑暗洞穴中，繁衍出一群適應極限環境的獨特生物。在玉泉洞內，科學家發現了多種亞熱帶島嶼特有的珍稀生物，包括：</p>
+                            <p class="hanging-list"><span class="list-dot"></span>洞穴隱者：蝙蝠、失去視覺的盲長腳蛛、大守宮（壁虎）。</p>
+                            <p class="hanging-list"><span class="list-dot"></span>水下巨客：日本最大的淡水蝦，及體長超1.5公尺的巨大鱸鰻。</p>
+            
+                            <div class="section-title">鐘乳石圖鑑：地底的藝術品</div>
+                            <p class="mb-3">洞內展現了極為多樣化的地質奇觀，宛如一座地底自然博物館：</p>
+                            <p class="hanging-list"><span class="list-dot"></span>鐘乳石 (Stalactite)：從洞頂垂掛而下，如冰柱般的姿態。</p>
+                            <p class="hanging-list"><span class="list-dot"></span>石筍 (Stalagmite)：像竹筍般從地面向上生長。</p>
+                            <p class="hanging-list"><span class="list-dot"></span>微型邊石 (Microgour)：隨地下水流動規律而形成的階梯狀紋路。</p>
+                            <p class="hanging-list"><span class="list-dot"></span>洞穴珍珠 (Cave Pearl)：以砂粒為核心，在水滴碰撞下圓潤成長的碳酸鈣結晶。</p>
+                            <p class="hanging-list"><span class="list-dot"></span>浮游方解石 (Floating Calcite)：僅在特定季節才能見到的稀有地質現象，結晶如薄冰般飄浮於水面。</p>
+                        </div>
+                    </div>
+
+                    <div id="kingdom-village-story" class="hidden">
+                        <div class="mt-3 border-t border-dashed border-white/20"></div>
+                        <div class="mt-4 text-[14px] leading-[1.6] opacity-80 text-justify font-body_tw">
+                            <div class="section-title">琉球建築美學：紅瓦與獅子的智慧</div>
+                            <div class="py-2 flex justify-center">
+                                <img src="https://i.meee.com.tw/CEDWHww.jpg" alt="琉球王國城下町" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                            </div>
+                            <p class="hanging-list"><span class="list-dot"></span>高貴的紅瓦：赤瓦自18世紀開始製造，當時「紅色」象徵高貴，直到明治時代才允許庶民使用。為了抵禦颱風，職人用「漆灰（Shi-kku）」加固瓦片縫隙；傳說屋頂上的石獅子（Shisa），正是瓦片職人利用剩餘的漆灰與瓦片隨手捏製而成的起點。</p>
+                            <p class="hanging-list"><span class="list-dot"></span>琉裝散策： 琉裝融合了中國漢服與日本和服的影響，過去僅限王族與士族穿著。其鮮豔的「紅型」花紋極具魅力，非常推薦穿上琉裝在古宅間攝影。</p>
+                            <p class="hanging-list"><span class="list-dot"></span>慢活建築： 寬大的屋簷（雨端）遮蔽烈日，讓微風在敞開的門戶間吹拂。這就是沖繩人所謂的「Yonna-Yonna（悠閒漫步）」，讓人感到無比懷舊與放鬆。</p>
+            
+                            <div class="section-title">名宅巡禮</div>
+                            <div class="py-2 flex justify-center">
+                                <img src="https://i.meee.com.tw/Nawbr5s.jpg" alt="琉球王國城下町2" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                            </div>
+                            <p class="hanging-list"><span class="list-dot"></span>舊喜屋武家住宅：戰火洗禮的奇蹟</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>歷史：曾為舊具志頭村村長的府邸。此地曾是沖繩戰役地面戰最激烈的區域，這棟建築奇蹟般地保存下來。</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>看點：走廊支柱上仍留有當年砲彈襲擊的生烈傷痕。移築時，甚至從庭院挖出兩枚大型不發彈，是見證戰爭歷史的珍貴遺構。</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>現狀：轉型為紅型工房，提供染織實演、銷售與體驗。</p>
+                            <p class="hanging-list"><span class="list-dot"></span>舊田場家住宅：承襲王都首里的優雅</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>歷史：拆除那霸市內的貴族「御殿」後，利用其高級木材於首里石嶺重建。其格局與傳統民家不同，顯示了當時地緣與生活規模的獨特性。</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>看點：柱子上留有二戰期間日本軍留下的刀傷。戰後曾被美軍作為帳篷營地使用，柱上留有無數釘孔。</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>現狀：轉型為紙藝工房，運用月桃、芭蕉等沖繩素材傳承古老的造紙文化。</p>    
+                            <p class="hanging-list"><span class="list-dot"></span>舊上里家住宅：傳統格局的典範</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>歷史：移築自伊是名村。完整展現了沖繩傳統住宅的構造：一番座（客廳）、二番座、存放遺物與貴重品的後座，以及環繞建築的「雨端」走廊。</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>現狀：作為各種體驗講座、活動、琉球婚禮以及遊客休息區使用。</p>
+                            <p class="hanging-list"><span class="list-dot"></span>舊伊禮家住宅：藍染的故鄉</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>歷史：原主曾任村公所助役（副村長），因此屋號被稱為「助役家」。建築周圍曾以桌珊瑚石灰岩堆砌石牆，並種植福木作為防風林。</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>現狀：轉型為琉球藍染工房，提供傳統藍染製品的實演與體驗。</p>
+                            
+                            <div class="section-title">特殊史蹟</div>
+                            <div class="py-2 flex justify-center">
+                                <img src="https://i.meee.com.tw/zZDJ3O0.jpg" alt="琉球王國城下町2" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                            </div>
+                            <p class="hanging-list"><span class="list-dot"></span>舊知念家「豬廁」（Furu）</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>建於明治30年左右。這是沖繩獨特的石造技術，利用琉球石灰岩砌成圓拱形，將「廁所」與「豬圈」結合，由豬隻處理排泄物的循環系統。雖然大正時期因衛生問題被下令拆除禁止，但這座古蹟幸運地保存至今，是極為稀有的石造技術遺產。</p>
+                            <p class="hanging-list"><span class="list-dot"></span>守護者：琉球犬「空小姐（Sora-chan）」</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>城下町住著沖繩縣指定天然紀念物——琉球犬。她叫空（Sora），雖然看起來凜然有神，其實是個怕生的小女生。</p>
+                                <p class="nested-list"><span class="sub-list-dot"></span>小百科：琉球犬與日本本土犬種不同，被認為保留了繩文時代南方型犬種的純淨血統，極具生物研究價值。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--第4個行程：玉泉洞前→国内線旅客ターミナルビル-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">玉泉洞前</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">11:20</span>
+                    </div>
+
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">琉球バス交通８３玉泉洞線<br>国際線旅客ターミナル前行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥780</p>
+                            </div>
+                            <a href="https://reurl.cc/3b8bOj" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-bus text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">国内線旅客ターミナルビル</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">12:16</span>
+                    </div>
+                </div>
+
+                <!--第5個行程：那覇空港→瀬長島ホテル-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">那覇空港</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">12:47</span>
+                    </div>
+    
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">連絡バス東京バスウミカジライナー（TK02）<br>琉球ホテル＆リゾート名城ビーチ行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">那覇空港1階バス乗り場(6)</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥250</p>
+                            </div>
+                            <a href="https://reurl.cc/NN5NqQ" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-bus text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">瀬長島ホテル</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">13:08</span>
+                    </div>
+
+                    <div class="ml-[1.6rem] mt-3">
+                        <button onclick="toggleGuide('transit-guide-5')" 
+                            class="inline-flex items-center border border-slate-300 text-slate-500 px-2 py-0.5 rounded-lg text-[13px] font-bold btn-scale transition-all bg-white/50" >
+                            <i class="fa-solid fa-circle-info mr-1.5 text-[13px]"></i>
+                            乘車指南
+                        </button>
+                    </div>
+
+                    <div id="transit-guide-5" class="hidden">
+                        <div class="ml-[1.6rem] mt-3 border-t border-dashed border-slate-300"></div>
+                        <div class="ml-[1.6rem] mt-4 space-y-5">
+                            <div class="flex justify-center">
+                                <img src="https://i.meee.com.tw/9xpFGcb.jpg" alt="乘車指南說明" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                            </div>
+                            <div>
+                                <p class="text-[14px] text-slate-500 leading-relaxed">
+                                    乘車處靠近機場國內線出口3<br>
+                                    上車時先抽取整理券，下車時付費。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--第6個行程：瀬長島-->
+                <div class="bg-morandi rounded-xl p-6 mb-6 text-white shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">瀨長島</h3>
+                        <a href="https://maps.app.goo.gl/7SYTR2253kEbXgcj9" target="_blank" class="bg-white text-morandi px-3 py-1 rounded-md text-[12px] font-bold btn-scale">MAP</a>
+                    </div>
+
+                    <div class="mt-2">
+                        <button onclick="toggleExclusiveGuide('senagajima-story', '')" class="inline-flex items-center border border-white/30 text-white/80 px-2 py-0.5 rounded-lg text-[13px] font-bold btn-scale transition-all bg-white/10">
+                            <i class="fa-solid fa-book-open mr-1.5 text-[13px]"></i>深度介紹
+                        </button>
+                    </div>
+
+                    <div id="senagajima-story" class="hidden">
+                        <div class="mt-3 border-t border-dashed border-white/20"></div>
+                        <div class="mt-4 text-[14px] leading-[1.6] opacity-90 text-justify font-body_tw">
+            
+                            <div class="section-title" style="background-color: #6eb9b5; color: #ffffff; padding: 4px 8px; border-radius: 4px; display: inline-block; font-weight: bold; margin-top: 12px; margin-bottom: 4px;">海風露台</div>
+                            <div class="py-2 flex justify-center">
+                                <img src="https://i.meee.com.tw/Boo1KyI.jpg" alt="海風露台" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                            </div>
+                            <p class="mb-3">依傍著瀨長島傾斜的山坡而建，純白色的建築採階梯式設計，整齊地層疊向大海延伸。這種設計靈感源自希臘聖托里尼等島嶼，與沖繩蔚藍的天空與寶藍色海水形成強烈對比。這裡不僅是購物中心，更是沖繩著名的「攝影聖地」。由於正對著那霸機場的第二跑道，遊客在露台用餐或散步時，能近距離看見各國客機從頭頂低空掠過，引擎的轟鳴聲與視覺的迫近感，讓這裡成為航空迷與攝影愛好者的天堂。</p>
+            
+                            <div class="section-title" style="background-color: #6eb9b5; color: #ffffff; padding: 4px 8px; border-radius: 4px; display: inline-block; font-weight: bold; margin-top: 12px; margin-bottom: 4px;">龍神足湯</div>
+                            <div class="py-2 flex justify-center">
+                                <img src="https://i.meee.com.tw/gLO6UWd.jpg" alt="龍神足湯" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                            </div>
+                            <p class="mb-3">位於海風露台購物區入口處附近，設有一處供遊客免費使用的「龍神足湯」。這裡同樣引流自島上的天然溫泉，是逛累了、想坐下來休息時的最佳去處。</p>
+            
+                            <div class="section-title" style="background-color: #6eb9b5; color: #ffffff; padding: 4px 8px; border-radius: 4px; display: inline-block; font-weight: bold; margin-top: 12px; margin-bottom: 4px;">求子石</div>
+                            <div class="py-2 flex justify-center">
+                                <img src="https://i.meee.com.tw/ohV8T7Z.jpg" alt="求子石" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                            </div>
+                            <p class="mb-3">島上有一塊著名的巨石叫做「子寶岩」。在過去，求子心切的夫婦會對著石頭祈禱：若是想要男孩子，就將石頭投向岩石上方的洞口；若想要女孩子，則投向下方。雖然原始的岩石在二戰時期被炸毀，但現在島上已重建了複製品，延續這份守護新生命的信仰。</p>
+            
+                            <div class="section-title" style="background-color: #6eb9b5; color: #ffffff; padding: 4px 8px; border-radius: 4px; display: inline-block; font-weight: bold; margin-top: 12px; margin-bottom: 4px;">日落公園</div>
+                            <div class="py-2 flex justify-center">
+                                <img src="https://i.meee.com.tw/3xeFVvN.jpg" alt="日落公園" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                            </div>
+                            <p class="mb-3">位於島嶼的最西端，日落公園正如其名，是觀賞夕陽沉入「慶良間群島」海平線的最佳位置。當夕陽將海面染成一片金橘色時，海風露台的純白建築也會反射出溫潤的光澤，構成全島最靜謐、最迷人的魔幻時刻。與海風露台側看飛機不同，日落公園位於跑道延伸線上，當南風盛行時（4月至夏季），飛機會在降落前以「壓頂之勢」掠過公園上方。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--第7個行程：瀬長島ホテル→那覇空港-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">瀬長島ホテル</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">12:47</span>
+                    </div>
+    
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">連絡バス東京バスウミカジライナー（TK02）<br>国際通り入口行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥250</p>
+                            </div>
+                            <a href="https://reurl.cc/zK2KAQ" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-bus text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">那覇空港</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">13:08</span>
+                    </div>
+
+                    <div class="ml-[1.6rem] mt-3">
+                        <button onclick="toggleGuide('transit-guide-7')" 
+                            class="inline-flex items-center border border-slate-300 text-slate-500 px-2 py-0.5 rounded-lg text-[13px] font-bold btn-scale transition-all bg-white/50" >
+                            <i class="fa-solid fa-circle-info mr-1.5 text-[13px]"></i>乘車指南
+                        </button>
+                    </div>
+
+                    <div id="transit-guide-7" class="hidden">
+                        <div class="ml-[1.6rem] mt-3 border-t border-dashed border-slate-300"></div>
+                        <div class="ml-[1.6rem] mt-4 space-y-4">
+            
+                            <div>
+                                <h4 class="text-[14px] font-bold text-teal mb-2">搭車處</h4>
+                                <div class="flex justify-center">
+                                    <img src="https://i.meee.com.tw/PLNkrZN.jpg" alt="搭車處" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                                </div>
+                            </div>
+            
+                            <div class="mt-4">
+                                <h4 class="text-[14px] font-bold text-teal mb-2">時刻表</h4>
+                                <div class="grid gap-1">
+                                    <div class="grid grid-cols-[30px_1fr] gap-2 items-center bg-white rounded p-1">
+                                        <div class="flex items-center justify-center bg-teal text-white text-[14px] font-bold rounded p-1">13</div><div class="text-[14px] text-slate-600 font-num">15　45</div></div>
+                                    <div class="grid grid-cols-[30px_1fr] gap-2 items-center bg-transparent p-1">
+                                        <div class="flex items-center justify-center bg-teal text-white text-[14px] font-bold rounded p-1">14</div><div class="text-[14px] text-slate-600 font-num">15　45</div></div>
+                                    <div class="grid grid-cols-[30px_1fr] gap-2 items-center bg-white rounded p-1">
+                                        <div class="flex items-center justify-center bg-teal text-white text-[14px] font-bold rounded p-1">15</div><div class="text-[14px] text-slate-600 font-num">15　50</div></div>
+                                    <div class="grid grid-cols-[30px_1fr] gap-2 items-center bg-transparent p-1">
+                                        <div class="flex items-center justify-center bg-teal text-white text-[14px] font-bold rounded p-1">16</div><div class="text-[14px] text-slate-600 font-num">16　51</div></div>
+                                    <div class="grid grid-cols-[30px_1fr] gap-2 items-center bg-white rounded p-1">
+                                        <div class="flex items-center justify-center bg-teal text-white text-[14px] font-bold rounded p-1">17</div><div class="text-[14px] text-slate-600 font-num">26　56</div></div>
+                                    <div class="grid grid-cols-[30px_1fr] gap-2 items-center bg-transparent p-1">
+                                        <div class="flex items-center justify-center bg-teal text-white text-[14px] font-bold rounded p-1">18</div><div class="text-[14px] text-slate-600 font-num">31　59</div></div>
+                                    <div class="grid grid-cols-[30px_1fr] gap-2 items-center bg-white rounded p-1">
+                                        <div class="flex items-center justify-center bg-teal text-white text-[14px] font-bold rounded p-1">19</div><div class="text-[14px] text-slate-600 font-num">34　59</div></div>
+                                    <div class="grid grid-cols-[30px_1fr] gap-2 items-center bg-transparent p-1">
+                                        <div class="flex items-center justify-center bg-teal text-white text-[14px] font-bold rounded p-1">20</div><div class="text-[14px] text-slate-600 font-num">29</div></div>
+                                    <div class="grid grid-cols-[30px_1fr] gap-2 items-center bg-white rounded p-1">
+                                        <div class="flex items-center justify-center bg-teal text-white text-[14px] font-bold rounded p-1">21</div><div class="text-[14px] text-slate-600 font-num">02</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--第8個行程：那覇空港→美栄橋-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">那覇空港</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">Departure</span>
+                    </div>
+    
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">ゆいレール單軌列車<br>てだこ浦西行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥320</p>
+                            </div>
+                            <a href="https://reurl.cc/k848l3" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-train-subway text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">美栄橋</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">Arrival</span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!--第3天-->
+            <div id="day3-content" class="day-content  hide-day pb-8">
+                <!--第1個行程：美栄橋→旭橋-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">美栄橋</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">07:44</span>
+                    </div>
+    
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">ゆいレール單軌列車<br>那覇空港行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥250</p>
+                            </div>
+                            <a href="https://reurl.cc/aXvx6Z" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-train-subway text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">旭橋</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">07:47</span>
+                    </div>
+                </div>
+
+                <!--第2個行程：那覇バスターミナル→桑江-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">那覇バスターミナル</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">08:05</span>
+                    </div>
+
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">琉球バス交通沖縄バス２８読谷線<br>読谷バスターミナル行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">3月台發車</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥840</p>
+                            </div>
+                            <a href="https://reurl.cc/gngnaQ" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-bus text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">桑江</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">08:46</span>
+                    </div>
+                </div>
+
+                <!--第3個行程：沖繩美國村-->
+                <div class="bg-morandi rounded-xl p-6 mb-6 text-white shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">沖繩美國村</h3>
+                        <a href="https://maps.app.goo.gl/PwqvvuVsgW74eBEB7" target="_blank" class="bg-white text-morandi px-3 py-1 rounded-md text-[12px] font-bold btn-scale">MAP</a>
+                    </div>
+
+                    <div class="text-[14px] opacity-90 leading-relaxed font-body_tw mb-4">
+                        <div class="flex items-center mb-1">
+                            <i class="fa-regular fa-clock mr-2 w-4 text-center"></i>
+                            <span>10:00 - 22:00</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-person-walking mr-2 w-4 text-center"></i>
+                            <span>桑江站徒步約 5min</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <button onclick="toggleGuide('american-village-story')" 
+                                class="inline-flex items-center border border-white/30 text-white/80 px-2 py-0.5 rounded-lg text-[13px] font-bold btn-scale transition-all bg-white/10" >
+                            <i class="fa-solid fa-book-open mr-1.5 text-[13px]"></i>
+                            深度介紹
+                        </button>
+                    </div>
+
+                    <div id="american-village-story" class="hidden">
+                        <div class="mt-3 border-t border-dashed border-white/20"></div>
+        
+                        <div class="mt-4 text-[14px] leading-[1.8] opacity-80 text-justify space-y-4 font-body_tw">
+                            <p>
+                                這裡曾是美軍基地（桑江營區）的一部分，1981年歸還後，於1998年正式開發為綜合商業區。
+                            </p>
+
+                            <div>
+                                <div class="section-title" style="background-color: #6eb9b5; color: #ffffff; padding: 2px 8px; border-radius: 4px; display: inline-block; font-weight: bold; margin-bottom: 8px;">【北谷長老】</div>
+                                <div class="py-2 flex justify-center">
+                                    <img src="https://i.meee.com.tw/8J0A61X.jpg" alt="北谷長老" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                                </div>
+                                <p>在美國村隨處可見一位白鬍子長老的圖騰，那是這裡的守護神吉祥物，象徵著快樂與長壽。</p>
+                            </div>
+
+                            <div>
+                                <div class="section-title" style="background-color: #6eb9b5; color: #ffffff; padding: 2px 8px; border-radius: 4px; display: inline-block; font-weight: bold; margin-bottom: 8px;">【Depot Island】</div>
+                                <div class="py-2 flex justify-center">
+                                    <img src="https://i.meee.com.tw/vo655rs.jpg" alt="Depot Island" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                                </div>
+                                <p>這是美國村內最受歡迎的區域。建築風格融合了歐美古鎮與工業風，隨處可見復古跑車、塗鴉牆與精緻的小徑。</p>
+                            </div>
+
+                            <div>
+                                <div class="section-title" style="background-color: #6eb9b5; color: #ffffff; padding: 2px 8px; border-radius: 4px; display: inline-block; font-weight: bold; margin-bottom: 8px;">【消波塊的藝術】</div>
+                                <p>北谷的海濱散步道旁，消波塊上常有可愛的塗鴉或是造型。這不僅是防波設施，更展現了沖繩人將生硬建築轉化為藝術的幽默感。</p>
+                            </div>
+
+                            <div>
+                                <div class="section-title" style="background-color: #6eb9b5; color: #ffffff; padding: 2px 8px; border-radius: 4px; display: inline-block; font-weight: bold; margin-bottom: 8px;">【日落海灘】</div>
+                                <div class="py-2 flex justify-center">
+                                    <img src="https://i.meee.com.tw/LdBBFOI.jpg" alt="日落海灘" class="rounded-lg shadow-sm w-full max-w-[280px] h-auto object-cover">
+                                </div>
+                                <p>人工打造的弧形沙灘。雖然是人工沙灘，但沙質細白，是欣賞沖繩中部夕陽的頭等席。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--第4個行程：美滨美国村入口→港川-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">美滨美国村入口</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">DEPARTURE</span>
+                    </div>
+
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">琉球バス交通沖縄バス１２０名護西空港線<br>国際線旅客ターミナル前行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥530</p>
+                            </div>
+                            <a href="https://reurl.cc/oKNK55" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-bus text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">港川</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">ARRIVAL</span>
+                    </div>
+                </div>
+
+                <!--第5個行程：港川外人住宅-->
+                <div class="bg-morandi rounded-xl p-6 mb-6 text-white shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">港川外人住宅</h3>
+                        <a href="https://maps.app.goo.gl/R3jctTSuPJNK32Tr6" target="_blank" class="bg-white text-morandi px-3 py-1 rounded-md text-[12px] font-bold btn-scale">MAP</a>
+                    </div>
+
+                    <div class="text-[14px] opacity-90 leading-relaxed font-body_tw mb-4">
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-person-walking mr-2 w-4 text-center"></i>
+                            <span>港川站徒步約 5min</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <button onclick="toggleGuide('minatogawa-story')" 
+                                class="inline-flex items-center border border-white/30 text-white/80 px-2 py-0.5 rounded-lg text-[13px] font-bold btn-scale transition-all bg-white/10" >
+                            <i class="fa-solid fa-book-open mr-1.5 text-[13px]"></i>
+                            深度介紹
+                        </button>
+                    </div>
+
+                    <div id="minatogawa-story" class="hidden">
+                        <div class="mt-3 border-t border-dashed border-white/20"></div>
+        
+                        <div class="mt-4 text-[14px] leading-[1.8] opacity-80 text-justify space-y-4 font-body_tw">
+                            <p>原本是 1950 至 1960 年代派駐沖繩的美軍及其家眷居住的宿舍區。這類平房被當地人稱為「外人住宅」。</p>
+                            <p>房屋構造多為簡單的單層箱型混凝土結構。1972 年沖繩歸還日本後，這類住宅開放給一般民眾居住。由於格局方正且租金相對穩定，吸引了許多富有創意的店主進駐。</p>
+                            <p>目前約有 60 多棟平房，分佈在以美國各州命名的街道上，例如 Florida St.、Kansas St.、Texas St.。</p>
+                            <p class="italic border-l-2 border-white/30 pl-3 py-1">
+                                建議先去 oHacorté 領取水果塔號碼牌，接著在巷弄間散步拍照，最後再回到店內內用。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--第6個行程：港川→那覇バスターミナル-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">港川</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">DEPARTURE</span>
+                    </div>
+
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">琉球バス交通沖縄バス２９読谷線<br>那覇バスターミナル行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥520</p>
+                            </div>
+                            <a href="https://reurl.cc/3b8beM" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-bus text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">那覇バスターミナル</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">ARRIVAL</span>
+                    </div>
+                </div>
+
+                <!--第7個行程：旭橋→美栄橋-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">旭橋</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">DEPARTURE</span>
+                    </div>
+
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">ゆいレール單軌列車<br>てだこ浦西行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥250</p>
+                            </div>
+                            <a href="https://reurl.cc/GGzGKG" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-train-subway text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">美栄橋</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">ARRIVAL</span>
+                    </div>
+                </div>
+
+
+            </div>
+            <!--第4天-->
+            <div id="day4-content" class="day-content  hide-day pb-8">
+                <!--第1個行程：飯店Check-Out-->
+                <div class="bg-morandi rounded-xl p-6 mb-6 text-white shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">飯店Check-Out</h3>
+                    </div>
+
+                    <div class="text-[14px] opacity-90 leading-relaxed font-body_tw">
+                        <div class="flex items-center">
+                            <i class="fa-regular fa-clock mr-2 w-4 text-center"></i>
+                            <span>11:00 前 check out</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--第2個行程：美栄橋→那覇空港-->
+                <div class="bg-slate_bg rounded-xl p-6 mb-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">美栄橋</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">07:30</span>
+                    </div>
+
+                    <div class="ml-1.5 border-l-2 border-dashed border-slate-300 pl-[18px] my-2">
+                        <div class="bg-white rounded-xl p-4 flex justify-between items-center shadow-sm border border-slate-100">
+                            <div>
+                                <p class="text-sm text-slate-400 font-bold">ゆいレール單軌列車<br>那覇空港行</p>
+                                <p class="text-sm text-slate-500 font-num mt-1">車資 ¥320</p>
+                            </div>
+                            <a href="https://reurl.cc/9bdbRY" target="_blank" class="text-sage btn-scale">
+                                <i class="fa-solid fa-train-subway text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="node-outer mr-3"><div class="node-inner"></div></div>
+                            <span class="font-bold text-teal text-[14px]">那覇空港</span>
+                        </div>
+                        <span class="text-slate-400 text-[14px] font-num tracking-widest uppercase">07:46</span>
+                    </div>
+            </div>
+
+            </div>
+
+        </div>
+    </div>
+
+<!--DINING分頁-->
+    <div id="dining" class="page px-6 pt-10 space-y-4 pb-8">
+        <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center">Dining</h2>
+        
+        <!--氾濫漢堡-->
+        <div class="bg-white rounded-[15px] p-5 shadow-[0_8px_20px_rgba(0,0,0,0.15)] flex items-center border border-slate-50 transition-all">
+    
+    <div class="flex-shrink-0 mr-4">
+        <a href="maps.app.goo.gl/PQtYDgNTfAbdmLWF7" target="_blank" class="block w-20 h-20 overflow-hidden rounded-[12px] active:scale-95 transition-transform shadow-sm">
+            <img src="https://i.meee.com.tw/6qxI3BL.jpg" alt="氾濫バーガー" class="w-full h-full object-cover">
+        </a>
+    </div>
+
+    <div class="flex-grow min-w-0">
+        <h2 class="text-[15px] font-bold text-slate-700 leading-tight line-clamp-2">氾濫バーガー チムフガス</h2>
+        <p class="text-[14px] text-slate-400 line-clamp-2 mt-0.5">瀨長島海風露台4號店</p>
+        
+        <div class="flex items-center text-[13px] text-slate-500 mt-1">
+            <i class="fa-regular fa-clock mr-1.5"></i>
+            <span class="font-medium">11:00-21:00</span>
+        </div>
+        <div class="flex gap-2 mt-2">
+            <span class="px-3 py-0.5 bg-slate-200 text-slate-600 text-[12px] rounded-full">漢堡</span>
+        </div>
+    </div>
+    
+</div>
+
+        <!--by・The・Shrimp-->
+        <div class="bg-white rounded-[15px] p-5 shadow-[0_8px_20px_rgba(0,0,0,0.15)] flex items-center border border-slate-50 transition-all">
+    
+    <div class="w-20 mr-4 flex flex-col items-center flex-shrink-0">
+        <div class="w-20 h-20 overflow-hidden rounded-[12px] mb-3">
+            <img src="https://i.meee.com.tw/kdfIEeq.jpg" alt="by・The・Shrimp" class="w-full h-full object-cover">
+        </div>
+
+        <a href="maps.app.goo.gl/vvF882RWQdLgpPFh7" target="_blank" class="px-3 h-7 bg-[#94a3a8] text-white rounded-lg text-[12px] font-bold flex items-center justify-center shadow-sm transition-opacity hover:opacity-80 flex-shrink-0">
+            <i class="fa-solid fa-location-dot mr-1"></i> MAP
+        </a>
+    </div>
+
+    <div class="flex-grow min-w-0">
+        <h2 class="text-[15px] font-bold text-slate-700 leading-tight line-clamp-2">by・The・Shrimp</h2>
+        <p class="text-[14px] text-slate-400 line-clamp-2 mt-0.5">瀨長島海風露台23號店</p>
+        
+        <div class="flex items-center text-[13px] text-slate-500 mt-1">
+            <i class="fa-regular fa-clock mr-1.5"></i>
+            <span class="font-medium">11:00-21:00</span>
+        </div>
+        <div class="flex gap-2 mt-2">
+            <span class="px-3 py-0.5 bg-slate-200 text-slate-600 text-[12px] rounded-full">蝦蝦飯</span>
+        </div>
+    </div>
+    
+</div>
+
+        <!--Calbee＋-->
+        <div class="bg-white rounded-[15px] p-5 shadow-[0_8px_20px_rgba(0,0,0,0.15)] flex items-center border border-slate-50 transition-all">
+            <div class="w-20 h-20 flex-shrink-0 overflow-hidden rounded-[12px] mr-4">
+                <img src="https://i.meee.com.tw/kHzuGCb.png" alt="Calbee＋" class="w-full h-full object-cover">
+            </div>
+
+            <div class="flex-grow min-w-0">
+                <h2 class="text-[15px] font-bold text-slate-700 leading-tight truncate">Calbee＋</h2>
+                <p class="text-[14px] text-slate-400 truncate mt-0.5">沖縄県那覇市牧志3-2-2</p>
+                <div class="flex items-center text-[13px] text-slate-500 mt-1">
+                    <i class="fa-regular fa-clock mr-1.5"></i>
+                    <span class="font-medium">10:00-20:30</span>
+                </div>
+                <div class="flex gap-2 mt-2">
+                    <span class="px-3 py-0.5 bg-slate-200 text-slate-600 text-[12px] rounded-full">現炸薯條</span>
+                </div>
+            </div>
+
+            <a href="https://maps.app.goo.gl/WyqrUtPNLs1PCiUs5" target="_blank" class="flex-shrink-0 ml-3 w-14 h-7 bg-[#94a3a8] text-white rounded-lg text-[12px] font-bold flex items-center justify-center shadow-sm">
+                <i class="fa-solid fa-location-dot mr-1"></i> MAP
+            </a>
+        </div>
+
+        <!--ほうき星-->
+        <div class="bg-white rounded-[15px] p-5 shadow-[0_8px_20px_rgba(0,0,0,0.15)] flex items-center border border-slate-50 transition-all">
+            <div class="w-20 h-20 flex-shrink-0 overflow-hidden rounded-[12px] mr-4">
+                <img src="https://i.meee.com.tw/rcTiLUm.jpg" alt="ほうき星" class="w-full h-full object-cover">
+            </div>
+
+            <div class="flex-grow min-w-0">
+                <h2 class="text-[15px] font-bold text-slate-700 leading-tight truncate">ほうき星</h2>
+                <p class="text-[14px] text-slate-400 truncate mt-0.5">浦添外人住宅區 編號25</p>
+                <div class="flex items-center text-[13px] text-slate-500 mt-1">
+                    <i class="fa-regular fa-clock mr-1.5"></i>
+                    <span class="font-medium">11:30-18:00</span>
+                </div>
+                <div class="flex gap-2 mt-2">
+                    <span class="px-3 py-0.5 bg-slate-200 text-slate-600 text-[12px] rounded-full">黑糖可麗露</span>
+                </div>
+            </div>
+
+            <a href="https://maps.app.goo.gl/mUnZVE5PjE1C9tQP7" target="_blank" class="flex-shrink-0 ml-3 w-14 h-7 bg-[#94a3a8] text-white rounded-lg text-[12px] font-bold flex items-center justify-center shadow-sm">
+                <i class="fa-solid fa-location-dot mr-1"></i> MAP
+            </a>
+        </div>        
+
+        <!--oHacorte港川店-->
+        <div class="bg-white rounded-[15px] p-5 shadow-[0_8px_20px_rgba(0,0,0,0.15)] flex items-center border border-slate-50 transition-all">
+            <div class="w-20 h-20 flex-shrink-0 overflow-hidden rounded-[12px] mr-4">
+                <img src="https://i.meee.com.tw/bS6nDHv.jpg" alt="oHacorte 港川店" class="w-full h-full object-cover">
+            </div>
+
+            <div class="flex-grow min-w-0">
+                <h2 class="text-[15px] font-bold text-slate-700 leading-tight truncate">oHacorte 港川店</h2>
+                <p class="text-[14px] text-slate-400 truncate mt-0.5">浦添外人住宅區 編號18</p>
+                <div class="flex items-center text-[13px] text-slate-500 mt-1">
+                    <i class="fa-regular fa-clock mr-1.5"></i>
+                    <span class="font-medium">11:30-19:00</span>
+                </div>
+                <div class="flex gap-2 mt-2">
+                    <span class="px-3 py-0.5 bg-slate-200 text-slate-600 text-[12px] rounded-full">水果塔</span>
+                </div>
+            </div>
+
+            <a href="https://maps.app.goo.gl/jtsu4D9BzXJetqzXA" target="_blank" class="flex-shrink-0 ml-3 w-14 h-7 bg-[#94a3a8] text-white rounded-lg text-[12px] font-bold flex items-center justify-center shadow-sm">
+                <i class="fa-solid fa-location-dot mr-1"></i> MAP
+            </a>
+        </div>
+
+        <!--Seaside Cafe Hanon-->
+        <div class="bg-white rounded-[15px] p-5 shadow-[0_8px_20px_rgba(0,0,0,0.15)] flex items-center border border-slate-50 transition-all">
+            <div class="w-20 h-20 flex-shrink-0 overflow-hidden rounded-[12px] mr-4">
+                <img src="https://i.meee.com.tw/Ny4Qwdz.jpg" alt="Seaside Cafe Hanon" class="w-full h-full object-cover">
+            </div>
+
+            <div class="flex-grow min-w-0">
+                <h2 class="text-[15px] font-bold text-slate-700 leading-tight">Seaside Cafe Hanon</h2>
+                <p class="text-[14px] text-slate-400 leading-normal mt-0.5 break-words">
+                美國村濱海商店街Fashion大樓 B-3 2F
+                </p>
+                <div class="flex items-center text-[13px] text-slate-500 mt-1">
+                    <i class="fa-regular fa-clock mr-1.5 flex-shrink-0"></i>
+                    <span class="font-medium">8:30-19:00(L.O.18:00)</span>
+                </div>
+                <div class="flex gap-2 mt-2">
+                    <span class="px-3 py-0.5 bg-slate-200 text-slate-600 text-[12px] rounded-full">海景</span>
+                    <span class="px-3 py-0.5 bg-slate-200 text-slate-600 text-[12px] rounded-full">鬆餅</span>
+                </div>
+            </div>
+
+            <a href="https://maps.app.goo.gl/gffKZ8sZkm6RaPuw7" target="_blank" class="flex-shrink-0 ml-3 w-14 h-7 bg-[#94a3a8] text-white rounded-lg text-[12px] font-bold flex items-center justify-center shadow-sm">
+                <i class="fa-solid fa-location-dot mr-1"></i> MAP
+            </a>
+        </div>        
+
+        
+
+    </div>
+
+<!--SHOPPING分頁-->
+    <div id="shopping" class="page px-6 pt-10">
+        <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center">Shopping</h2>
+
+        <!--頂部標籤列-->
+        <div class="flex justify-center space-x-3 mb-6">
+            <button onclick="switchTab('cosme')" id="btn-cosme" 
+                class="px-5 py-2 rounded-full text-[12px] transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.2)] bg-[#87a3a3] text-white">
+                Cosme
+            </button>
+            <button onclick="switchTab('coupons')" id="btn-coupons" 
+                class="px-5 py-2 rounded-full text-[12px] transition-all duration-300 bg-[#f1f5f9] text-[#94a3b8]">
+                Coupons
+            </button>
+        </div>
+
+        <!--藥妝清單分頁-->
+        <div id="content-cosme" class="grid grid-cols-3 gap-y-6 p-2 pb-8">
+    
+            <div class="flex flex-col items-center">
+                <div class="bg-[#80b8bc] border-[3px] border-[#dff4f2] px-2 py-1 rounded-[5px] mb-3 min-h-[36px] flex items-center justify-center w-[90%]">
+                    <h3 class="text-[11px] font-bold text-white text-center leading-tight">Chocola BB<br>Plus</h3>
+                </div>
+                <div class="w-full border-r border-dashed border-slate-300 pr-2">
+                    <div class="h-24 w-24 mx-auto mb-2 overflow-hidden rounded-[10px]">
+                        <img src="https://i.meee.com.tw/9YgYnix.jpg" alt="Chocola BB Plus" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[12px] text-[#8b9b9b] leading-tight text-center px-1">
+                        60粒 NT$549
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <div class="bg-[#80b8bc] border-[3px] border-[#dff4f2] px-2 py-1 rounded-[5px] mb-3 min-h-[36px] flex items-center justify-center w-[90%]">
+                    <h3 class="text-[11px] font-bold text-white text-center leading-tight">小林製藥喉嚨<br>殺菌消炎噴劑</h3>
+                </div>
+                <div class="w-full border-r border-dashed border-slate-300 px-2">
+                    <div class="h-24 w-24 mx-auto mb-2 overflow-hidden rounded-[10px]">
+                        <img src="https://i.meee.com.tw/yagGClp.jpg" alt="小林製藥喉嚨殺菌消炎噴劑" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[12px] text-[#8b9b9b] leading-tight text-center px-1">
+                        25ml NT$237
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <div class="bg-[#80b8bc] border-[3px] border-[#dff4f2] px-2 py-1 rounded-[5px] mb-3 min-h-[36px] flex items-center justify-center w-[90%]">
+                    <h3 class="text-[11px] font-bold text-white text-center leading-tight">參天FX NEO<br>清涼眼藥水</h3>
+                </div>
+                <div class="w-full pl-2">
+                    <div class="h-24 w-24 mx-auto mb-2 overflow-hidden rounded-[10px]">
+                        <img src="https://i.meee.com.tw/QQy5U4x.jpg" alt="參天FX NEO清涼眼藥水" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[12px] text-[#8b9b9b] leading-tight text-center px-1">
+                        12ml NT$110
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center pt-4">
+                <div class="bg-[#80b8bc] border-[3px] border-[#dff4f2] px-2 py-1 rounded-[5px] mb-3 min-h-[36px] flex items-center justify-center w-[90%]">
+                    <h3 class="text-[11px] font-bold text-white text-center leading-tight">明治膠原<br>蛋白粉</h3>
+                </div>
+                <div class="w-full border-r border-dashed border-slate-300 pr-2">
+                    <div class="h-24 w-24 mx-auto mb-2 overflow-hidden rounded-[10px]">
+                        <img src="https://i.meee.com.tw/osuGKnu.jpg" alt="明治膠原蛋白粉" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[12px] text-[#8b9b9b] leading-tight text-center px-1">
+                        28日份 NT$840
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center pt-4">
+                <div class="bg-[#80b8bc] border-[3px] border-[#dff4f2] px-2 py-1 rounded-[5px] mb-3 min-h-[36px] flex items-center justify-center w-[90%]">
+                    <h3 class="text-[11px] font-bold text-white text-center leading-tight">DHC<br>維生素D</h3>
+                </div>
+                <div class="w-full border-r border-dashed border-slate-300 px-2">
+                    <div class="h-24 w-24 mx-auto mb-2 overflow-hidden rounded-[10px]">
+                        <img src="https://i.meee.com.tw/L5mmwAC.jpg" alt="DHC維生素D" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[12px] text-[#8b9b9b] leading-tight text-center px-1">
+                        60粒 NT$91
+                    </div>
+                </div>
+            </div>
+    
+            <div class="flex flex-col items-center pt-4">
+                <div class="bg-[#80b8bc] border-[3px] border-[#dff4f2] px-2 py-1 rounded-[5px] mb-3 min-h-[36px] flex items-center justify-center w-[90%]">
+                    <h3 class="text-[11px] font-bold text-white text-center leading-tight">DHC GABA<br>助眠保健品</h3>
+                </div>
+                <div class="w-full pl-2">
+                    <div class="h-24 w-24 mx-auto mb-2 overflow-hidden rounded-[10px]">
+                        <img src="https://i.meee.com.tw/rOPvkWj.jpg" alt="DHC GABA助眠保健品" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[12px] text-[#8b9b9b] leading-tight text-center px-1">
+                        20粒 NT$120
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center pt-4">
+                <div class="bg-[#80b8bc] border-[3px] border-[#dff4f2] px-2 py-1 rounded-[5px] mb-3 min-h-[36px] flex items-center justify-center w-[90%]">
+                    <h3 class="text-[11px] font-bold text-white text-center leading-tight">DHC持續型<br>維生素C</h3>
+                </div>
+                <div class="w-full border-r border-dashed border-slate-300 pr-2">
+                    <div class="h-24 w-24 mx-auto mb-2 overflow-hidden rounded-[10px]">
+                        <img src="https://i.meee.com.tw/gNwHFin.jpg" alt="DHC持續型維生素C" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[12px] text-[#8b9b9b] leading-tight text-center px-1">
+                        240粒 NT$134
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center pt-4">
+                <div class="bg-[#80b8bc] border-[3px] border-[#dff4f2] px-2 py-1 rounded-[5px] mb-3 min-h-[36px] flex items-center justify-center w-[90%]">
+                    <h3 class="text-[11px] font-bold text-white text-center leading-tight">DHC<br>持續型生物素</h3>
+                </div>
+                <div class="w-full border-r border-dashed border-slate-300 px-2">
+                    <div class="h-24 w-24 mx-auto mb-2 overflow-hidden rounded-[10px]">
+                        <img src="https://i.meee.com.tw/U2RaHb2.jpg" alt="DHC持續型生物素" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[12px] text-[#8b9b9b] leading-tight text-center px-1">
+                        60粒 NT$118
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center pt-4">
+                <div class="bg-[#80b8bc] border-[3px] border-[#dff4f2] px-2 py-1 rounded-[5px] mb-3 min-h-[36px] flex items-center justify-center w-[90%]">
+                    <h3 class="text-[11px] font-bold text-white text-center leading-tight">DHC<br>光對策葉黃素</h3>
+                </div>
+                <div class="w-full pl-2">
+                    <div class="h-24 w-24 mx-auto mb-2 overflow-hidden rounded-[10px]">
+                        <img src="https://i.meee.com.tw/vFXXIfw.jpg" alt="DHC光對策葉黃素" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[12px] text-[#8b9b9b] leading-tight text-center px-1">
+                        60粒 NT$405
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center pt-4">
+                <div class="bg-[#80b8bc] border-[3px] border-[#dff4f2] px-2 py-1 rounded-[5px] mb-3 min-h-[36px] flex items-center justify-center w-[90%]">
+                    <h3 class="text-[11px] font-bold text-white text-center leading-tight">DHC<br>鈣/鎂</h3>
+                </div>
+                <div class="w-full border-r border-dashed border-slate-300 pr-2">
+                    <div class="h-24 w-24 mx-auto mb-2 overflow-hidden rounded-[10px]">
+                        <img src="https://i.meee.com.tw/YCYztc4.jpg" alt="DHC鈣/鎂" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[12px] text-[#8b9b9b] leading-tight text-center px-1">
+                        60日份 NT$161
+                    </div>
+                </div>
+            </div> 
+
+            <div class="flex flex-col items-center pt-4">
+                <div class="bg-[#80b8bc] border-[3px] border-[#dff4f2] px-2 py-1 rounded-[5px] mb-3 min-h-[36px] flex items-center justify-center w-[90%]">
+                    <h3 class="text-[11px] font-bold text-white text-center leading-tight">Dr.Oral集中<br>美白凝膠牙膏</h3>
+                </div>
+                <div class="w-full border-r border-dashed border-slate-300 px-2">
+                    <div class="h-24 w-24 mx-auto mb-2 overflow-hidden rounded-[10px]">
+                        <img src="https://i.meee.com.tw/tPxIETP.jpg" alt="Dr.Oral 集中美白凝膠牙膏" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[12px] text-[#8b9b9b] leading-tight text-center px-1">
+                        ¥1430
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center pt-4">
+                <div class="bg-[#80b8bc] border-[3px] border-[#dff4f2] px-2 py-1 rounded-[5px] mb-3 min-h-[36px] flex items-center justify-center w-[90%]">
+                    <h3 class="text-[11px] font-bold text-white text-center leading-tight">樂敦V5護眼<br>改善睡眠錠</h3>
+                </div>
+                <div class="w-full pl-2">
+                    <div class="h-24 w-24 mx-auto mb-2 overflow-hidden rounded-[10px]">
+                        <img src="https://i.meee.com.tw/z4Pd80H.jpg" alt="樂敦V5 護眼×改善睡眠錠" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[12px] text-[#8b9b9b] leading-tight text-center px-1">
+                        30粒 ¥2808
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center pt-4">
+                <div class="bg-[#80b8bc] border-[3px] border-[#dff4f2] px-2 py-1 rounded-[5px] mb-3 min-h-[36px] flex items-center justify-center w-[90%]">
+                    <h3 class="text-[11px] font-bold text-white text-center leading-tight">DHC<br>纖水元素Plus</h3>
+                </div>
+                <div class="w-full border-r border-dashed border-slate-300 pr-2">
+                    <div class="h-24 w-24 mx-auto mb-2 overflow-hidden rounded-[10px]">
+                        <img src="https://i.meee.com.tw/9RBoKP2.jpg" alt="DHC 纖水元素" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[12px] text-[#8b9b9b] leading-tight text-center px-1">
+                        120粒 ¥2181
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!--Coupon分頁-->
+        <div id="content-coupons" class="hidden pb-8">
+            <div class="bg-[#dff5f2] rounded-[15px] p-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-50 mb-8">
+                <div class="space-y-0">
+
+                    <div class="flex items-center pt-2 pb-4"> 
+                        <div class="flex-grow min-w-0 pr-6 border-b border-[#a2b6b5] pb-4">
+                            <h2 class="text-[17px] font-bold text-slate-700 mb-3">驚安の殿堂-唐吉訶德</h2>
+                            <ul class="space-y-2">
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>30000以上免稅10%+優惠7%=最高17%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>10000以上免稅10%+優惠5%=最高15%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>按圖出示優惠券。（按下後，再請把手機交給店員確認點選）</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="https://japanportal.donki-global.com/coupon/cp001_zhtw.html" target="_blank" class="flex-shrink-0 transition-opacity hover:opacity-80">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                                <img src="https://i.meee.com.tw/KKCRuBk.jpg" alt="唐吉訶德" class="w-full h-full object-cover">
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="flex items-center pt-1 pb-4">
+                        <div class="flex-grow min-w-0 pr-6 border-b border-[#a2b6b5] pb-4">
+                            <h2 class="text-[17px] font-bold text-slate-700 mb-3">大國藥妝</h2>
+                            <ul class="space-y-2">
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>5000以上免稅10%+優惠3%=最高13%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>30000以上免稅10%+優惠5%=最高15%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>50000以上免稅10%+優惠8%=最高18%</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="https://i.meee.com.tw/WI9yIgB.jpg" target="_blank" class="flex-shrink-0">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                                <img src="https://i.meee.com.tw/Pse7Xbb.jpg" class="w-full h-full object-cover">
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="flex items-center pt-1 pb-4">
+                        <div class="flex-grow min-w-0 pr-6 border-b border-[#a2b6b5] pb-4">
+                            <h2 class="text-[17px] font-bold text-slate-700 mb-3">松本清</h2>
+                            <ul class="space-y-2">
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>10000以上免稅10%+優惠3%=最高13%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>30000以上免稅10%+優惠5%=最高15%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>50000以上免稅10%+優惠7%=最高17%</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="https://i.meee.com.tw/ZsOW5yG.jpg" target="_blank" class="flex-shrink-0">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                                <img src="https://i.meee.com.tw/JIvH8Ed.jpg" class="w-full h-full object-cover">
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="flex items-center pt-1 pb-4">
+                        <div class="flex-grow min-w-0 pr-6 border-b border-[#a2b6b5] pb-4">
+                            <h2 class="text-[17px] font-bold text-slate-700 mb-3">Cocokara Fine</h2>
+                            <ul class="space-y-2">
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>10000以上免稅10%+優惠3%=最高13%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>30000以上免稅10%+優惠5%=最高15%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>50000以上免稅10%+優惠7%=最高17%</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="https://i.meee.com.tw/OiuCJWX.jpg" target="_blank" class="flex-shrink-0">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                                <img src="https://i.meee.com.tw/ra2QjPH.jpg" class="w-full h-full object-cover">
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="flex items-center pt-1 pb-4">
+                        <div class="flex-grow min-w-0 pr-6 border-b border-[#a2b6b5] pb-4">
+                            <h2 class="text-[17px] font-bold text-slate-700 mb-3">札幌藥妝</h2>
+                            <ul class="space-y-2">
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>免稅10%+優惠5%=最高15%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>38888以上免稅10%+優惠7%=最高15%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>藥師不在時，不販售第一類醫藥品</span>
+                                </li>                                
+                            </ul>
+                        </div>
+                        <a href="https://i.meee.com.tw/YWxAxqZ.jpg" target="_blank" class="flex-shrink-0">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                                <img src="https://i.meee.com.tw/DbaoylS.jpg" class="w-full h-full object-cover">
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="flex items-center pt-1 pb-4">
+                        <div class="flex-grow min-w-0 pr-6 border-b border-[#a2b6b5] pb-4">
+                            <h2 class="text-[17px] font-bold text-slate-700 mb-3">BicCamera</h2>
+                            <ul class="space-y-2">
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>電器免稅10%+優惠7%=最高17%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>藥妝免稅10%+優惠5%=最高15%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>Apple商品、遊戲主機及官方配件無法享折扣</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="https://i.meee.com.tw/cxRdIBg.jpg" target="_blank" class="flex-shrink-0">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                                <img src="https://i.meee.com.tw/wL4oHvL.jpg" class="w-full h-full object-cover">
+                            </div>
+                        </a>
+                    </div>
+                
+                    <div class="flex items-center pt-1 pb-4">
+                        <div class="flex-grow min-w-0 pr-6 border-b border-[#a2b6b5] pb-4">
+                            <h2 class="text-[17px] font-bold text-slate-700 mb-3">EDION愛電王</h2>
+                            <ul class="space-y-2">
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>電器免稅10%+優惠7%=最高17%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>藥妝免稅10%+優惠5%=最高15%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>Apple商品、遊戲主機及官方配件無法享折扣</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="https://i.meee.com.tw/oPjiiUx.jpg" target="_blank" class="flex-shrink-0">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                                <img src="https://i.meee.com.tw/eyR8KcB.jpg" class="w-full h-full object-cover">
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="flex items-center pt-1 pb-4">
+                        <div class="flex-grow min-w-0 pr-6">
+                            <h2 class="text-[17px] font-bold text-slate-700 mb-3">山田電機</h2>
+                            <ul class="space-y-2">
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>免稅10%+優惠7%=最高17%</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>樂天信用卡消費限定</span>
+                                </li>
+                                <li class="flex items-start text-sm text-[#8b9b9b] leading-snug">
+                                    <i class="fa-regular fa-square-check mt-1 mr-2 text-[#87a3a3] text-[12px]"></i>
+                                    <span>Apple商品、遊戲主機及官方配件無法享折扣</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="https://i.meee.com.tw/xcRjE6I.jpg" target="_blank" class="flex-shrink-0">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                                <img src="https://i.meee.com.tw/g37oDzf.jpg" class="w-full h-full object-cover">
+                            </div>
+                        </a>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+<!--PREPARATION分頁-->
+    <div id="prep" class="page px-6 pt-10 pb-8">
+        <h2 class="font-title_en text-3xl tracking-widest mb-8 text-center">Preparation</h2>
+        
+        <!--List-->
+        <div class="bg-white rounded-[15px] p-6 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-slate-50 mb-8">
+            <div class="space-y-0" id="prep-list">
+                 <label class="flex items-center cursor-pointer py-3 border-b border-[#e5e7eb]">
+                    <input type="checkbox" class="custom-checkbox peer appearance-none w-4 h-4 border-2 border-[#cbd5e1] rounded-full cursor-pointer transition-all">
+                    <span class="ml-3 text-sm font-body_tw text-[#768989] peer-checked:text-[#9facbf] peer-checked:line-through transition-all">護照與機票列印</span>
+                </label>        
+            
+                <label class="flex items-center cursor-pointer py-3 border-b border-[#e5e7eb]">
+                    <input type="checkbox" class="custom-checkbox peer appearance-none w-4 h-4 border-2 border-[#cbd5e1] rounded-full cursor-pointer transition-all">
+                    <span class="ml-3 text-sm font-body_tw text-[#768989] peer-checked:text-[#9facbf] peer-checked:line-through transition-all">日幣現金</span>
+                </label>        
+
+                <label class="flex items-center cursor-pointer py-3 border-b border-[#e5e7eb]">
+                    <input type="checkbox" class="custom-checkbox peer appearance-none w-4 h-4 border-2 border-[#cbd5e1] rounded-full cursor-pointer transition-all">
+                    <span class="ml-3 text-sm font-body_tw text-[#768989] peer-checked:text-[#9facbf] peer-checked:line-through transition-all">VJW</span>
+                </label>
+
+                <label class="flex items-center cursor-pointer py-3 border-b border-[#e5e7eb]">
+                    <input type="checkbox" class="custom-checkbox peer appearance-none w-4 h-4 border-2 border-[#cbd5e1] rounded-full cursor-pointer transition-all">
+                    <span class="ml-3 text-sm font-body_tw text-[#768989] peer-checked:text-[#9facbf] peer-checked:line-through transition-all">SIM卡</span>
+                </label>
+				
+                <label class="flex items-center cursor-pointer py-3 border-b border-[#e5e7eb]">
+                    <input type="checkbox" class="custom-checkbox peer appearance-none w-4 h-4 border-2 border-[#cbd5e1] rounded-full cursor-pointer transition-all">
+                    <span class="ml-3 text-sm font-body_tw text-[#768989] peer-checked:text-[#9facbf] peer-checked:line-through transition-all">充電線</span>
+                </label>
+				
+                <label class="flex items-center cursor-pointer py-3 border-b border-[#e5e7eb]">
+                    <input type="checkbox" class="custom-checkbox peer appearance-none w-4 h-4 border-2 border-[#cbd5e1] rounded-full cursor-pointer transition-all">
+                    <span class="ml-3 text-sm font-body_tw text-[#768989] peer-checked:text-[#9facbf] peer-checked:line-through transition-all">常備藥品（感冒、腸胃、止痛、OK繃、酸痛軟膏）</span>
+                </label>
+								
+                <label class="flex items-center cursor-pointer py-3 border-b border-[#e5e7eb]">
+                    <input type="checkbox" class="custom-checkbox peer appearance-none w-4 h-4 border-2 border-[#cbd5e1] rounded-full cursor-pointer transition-all">
+                    <span class="ml-3 text-sm font-body_tw text-[#768989] peer-checked:text-[#9facbf] peer-checked:line-through transition-all">塑膠袋</span>
+                </label>
+				
+				<label class="flex items-center cursor-pointer py-3 border-b border-[#e5e7eb]">
+                    <input type="checkbox" class="custom-checkbox peer appearance-none w-4 h-4 border-2 border-[#cbd5e1] rounded-full cursor-pointer transition-all">
+                    <span class="ml-3 text-sm font-body_tw text-[#768989] peer-checked:text-[#9facbf] peer-checked:line-through transition-all">朱印帳</span>
+                </label>
+				
+				<label class="flex items-center cursor-pointer py-3 border-b border-[#e5e7eb]">
+                    <input type="checkbox" class="custom-checkbox peer appearance-none w-4 h-4 border-2 border-[#cbd5e1] rounded-full cursor-pointer transition-all">
+                    <span class="ml-3 text-sm font-body_tw text-[#768989] peer-checked:text-[#9facbf] peer-checked:line-through transition-all">防曬乳</span>
+                </label>
+								
+				<label class="flex items-center cursor-pointer py-3">
+                    <input type="checkbox" class="custom-checkbox peer appearance-none w-4 h-4 border-2 border-[#cbd5e1] rounded-full cursor-pointer transition-all">
+                    <span class="ml-3 text-sm font-body_tw text-[#768989] peer-checked:text-[#9facbf] peer-checked:line-through transition-all">預約P4停車場</span>
+                </label>
+
+            </div>
+        </div>
+    </div>
+
+
+<!--底部APP導航列-->
+    <nav class="fixed bottom-0 left-0 right-0 glass-nav z-50 px-4 pb-4 pt-4">
+        <div class="grid grid-cols-4 gap-y-4 max-w-md mx-auto">
+
+            <button onclick="showPage('home')" class="nav-item flex flex-col items-center btn-scale text-slate-300 active" id="btn-home">
+                <i class="fa-solid fa-house text-sm"></i>
+                <span class="text-[12px] mt-1 font-bold uppercase">HOME</span>
+            </button>
+            <button onclick="showPage('flight')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-flight">
+                <i class="fa-solid fa-plane text-sm"></i>
+                <span class="text-[12px] mt-1 font-bold uppercase">FLIGHT</span>
+            </button>
+            <button onclick="showPage('hotel')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-hotel">
+                <i class="fa-solid fa-hotel text-sm"></i>
+                <span class="text-[12px] mt-1 font-bold uppercase">HOTEL</span>
+            </button>
+            <button onclick="showPage('traffic')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-traffic">
+                <i class="fa-solid fa-train text-sm"></i>
+                <span class="text-[12px] mt-1 font-bold uppercase">TRAFFIC</span>
+            </button>
+        
+            <button onclick="showPage('spot')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-spot">
+                <i class="fa-solid fa-map-location-dot text-sm"></i>
+                <span class="text-[12px] mt-1 font-bold uppercase">SPOT</span>
+            </button>
+
+            <button onclick="showPage('dining')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-dining">
+                <i class="fa-solid fa-utensils text-sm"></i>
+                <span class="text-[12px] mt-1 font-bold uppercase">DINING</span>
+            </button>
+            <button onclick="showPage('shopping')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-shopping">
+                <i class="fa-solid fa-bag-shopping text-sm"></i>
+                <span class="text-[12px] mt-1 font-bold uppercase">SHOPPING</span>
+            </button>
+
+            <button onclick="showPage('prep')" class="nav-item flex flex-col items-center btn-scale text-slate-300" id="btn-prep">
+                <i class="fa-solid fa-clipboard-list text-sm"></i>
+                <span class="text-[12px] mt-1 font-bold uppercase">PREP</span>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        // 核心頁面切換邏輯
+        function showPage(pageId) {
+            // 1. 隱藏所有頁面
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // 2. 顯示目標頁面
+            document.getElementById(pageId).classList.add('active');
+            
+            // 3. 底部導航列控制：只有在首頁時隱藏
+            const bottomNav = document.querySelector('.glass-nav');
+            if (pageId === 'home') {
+                bottomNav.classList.add('hide-nav');
+            } else {
+                bottomNav.classList.remove('hide-nav');
+            }
+
+            // 4. 更新導航按鈕激活狀態
+            document.querySelectorAll('.nav-item').forEach(btn => {
+                btn.classList.remove('text-sage');
+                btn.classList.add('text-slate-300');
+            });
+            const activeBtn = document.getElementById('btn-' + pageId);
+            if (activeBtn) {
+                activeBtn.classList.add('text-sage');
+                activeBtn.classList.remove('text-slate-300');
+            }
+
+            // 5. Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Itinerary Day Switching
+        function switchDay(dayNum) {
+            // 1. 隱藏所有行程內容 (統一使用 hide-day)
+            document.querySelectorAll('.day-content').forEach(content => {
+                content.classList.add('hide-day');
+            });
+            // 2. 顯示目標行程 (加上 dayNum 變數對應 ID)
+            const targetContent = document.getElementById('day' + dayNum + '-content');
+            if (targetContent) {
+                targetContent.classList.remove('hide-day');
+            }
+            // 3. 更新分頁按鈕樣式
+            document.querySelectorAll('.day-tab').forEach(tab => {
+                tab.classList.remove('bg-sage', 'text-white', 'shadow-sm', 'font-bold');
+                tab.classList.add('bg-slate_bg', 'text-slate-400');
+            });
+            const activeTab = document.getElementById('tab-day' + dayNum);
+            if (activeTab) {
+                activeTab.classList.add('bg-sage', 'text-white', 'shadow-sm', 'font-bold');
+                activeTab.classList.remove('bg-slate_bg', 'text-slate-400');
+            }
+        }
+
+        // 初始化：點選 SPOT 時自動預設進入 DAY 1
+        function initializeTabs() {
+            switchDay(1); // 直接呼叫 switchDay 函數統一邏輯
+        }
+
+        // 綁定導航連結 (請確認您的 HTML 中導航連結 ID 是否為 spot-nav-link)
+        const spotLink = document.getElementById('spot-nav-link');
+        if (spotLink) {
+            spotLink.addEventListener('click', initializeTabs);
+        }
+
+        // Toggle Guide
+        function toggleGuide(guideId) {
+            const el = document.getElementById(guideId);
+            el.classList.toggle('hidden');
+        }
+
+        function toggleExclusiveGuide(showId, hideId) {
+            const showEl = document.getElementById(showId);
+            const hideEl = document.getElementById(hideId);
+            // 切換目標的顯示狀態
+            if (showEl.classList.contains('hidden')) {
+                showEl.classList.remove('hidden');
+            } else {
+                showEl.classList.add('hidden');
+            }
+            // 強制隱藏另一個 ID
+            hideEl.classList.add('hidden');
+        }
+
+        // Checklist Storage Logic
+        function handleCheck(checkbox) {
+            const label = checkbox.nextElementSibling;
+            if (checkbox.checked) {
+                label.classList.add('checked-item');
+            } else {
+                label.classList.remove('checked-item');
+            }
+            saveStatus();
+        }
+
+        function saveStatus() {
+            const checks = document.querySelectorAll('input[type="checkbox"]');
+            const statusMap = {};
+            checks.forEach(c => {
+                statusMap[c.id] = c.checked;
+            });
+            localStorage.setItem('okinawa_checklist', JSON.stringify(statusMap));
+        }
+
+        function loadStatus() {
+            const saved = localStorage.getItem('okinawa_checklist');
+            if (saved) {
+                const statusMap = JSON.parse(saved);
+                for (const id in statusMap) {
+                    const cb = document.getElementById(id);
+                    if (cb) {
+                        cb.checked = statusMap[id];
+                        if (cb.checked) cb.nextElementSibling.classList.add('checked-item');
+                    }
+                }
+            }
+        }
+
+        // Init
+        window.onload = () => {
+            loadStatus();
+            // 初始化時隱藏導航列 (因為預設進入首頁)
+            const bottomNav = document.querySelector('.glass-nav');
+            if(bottomNav) bottomNav.classList.add('hide-nav');
+            
+            // 確保 HOME 按鈕狀態
+            const homeBtn = document.getElementById('btn-home');
+            if(homeBtn) homeBtn.classList.add('text-sage');
+        };
+
+        // DAY分頁切換邏輯
+        function showTab(tabId) {
+            // 隱藏所有分頁
+            document.querySelectorAll('.day-content').forEach(tab => {
+                tab.classList.add('hide-day');
+            });
+            // 顯示指定分頁
+            document.getElementById(tabId).classList.remove('hide-day');
+        }
+
+        // SHOPPING分頁切換邏輯
+        function switchTab(tab) {
+            const cosmeBtn = document.getElementById('btn-cosme');
+            const couponsBtn = document.getElementById('btn-coupons');
+            const cosmeContent = document.getElementById('content-cosme');
+            const couponsContent = document.getElementById('content-coupons');
+
+            if (tab === 'cosme') {
+                cosmeContent.classList.remove('hidden');
+                couponsContent.classList.add('hidden');
+                // 切換按鈕樣式
+                cosmeBtn.className = "px-5 py-2 rounded-full text-[12px] transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.2)] bg-[#87a3a3] text-white";
+                couponsBtn.className = "px-5 py-2 rounded-full text-[12px] transition-all duration-300 bg-[#f1f5f9] text-[#94a3b8]";
+            } else {
+                cosmeContent.classList.add('hidden');
+                couponsContent.classList.remove('hidden');
+                // 切換按鈕樣式
+                couponsBtn.className = "px-5 py-2 rounded-full text-[12px] transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.2)] bg-[#87a3a3] text-white";
+                cosmeBtn.className = "px-5 py-2 rounded-full text-[12px] transition-all duration-300 bg-[#f1f5f9] text-[#94a3b8]";
+            }
+        }
+
+    </script>
+    
+</body>
+</html>
