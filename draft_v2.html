@@ -1715,9 +1715,9 @@
                 class="px-5 py-2 rounded-full text-[12px] transition-all duration-300 bg-[#f1f5f9] text-[#94a3b8]">
                 Coupons
             </button>
-            <button onclick="switchTab('snack')" id="btn-snack" 
+            <button onclick="switchTab('goods')" id="btn-goods" 
                 class="px-5 py-2 rounded-full text-[12px] transition-all duration-300 bg-[#f1f5f9] text-[#94a3b8]">
-                Snack
+                Goods
             </button>
         </div>
 
@@ -2119,8 +2119,8 @@
             </div>
         </div>
 
-        <!--點心分頁-->
-        <div id="content-snack" class="hidden pb-8">
+        <!--伴手禮分頁-->
+        <div id="content-goods" class="hidden pb-8">
             <div id="content-snack" class="grid grid-cols-2 gap-5 p-4 pb-10">
 
                 <div class="bg-white rounded-[20px] overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.08)] border border-slate-50 flex flex-col">
@@ -2200,6 +2200,33 @@
                         <p class="text-[13px] text-slate-400">人氣點心</p>
                     </div>
                 </div>
+
+                <div class="bg-white rounded-[20px] overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.08)] border border-slate-50 flex flex-col">
+                    <div class="relative h-40 w-full overflow-hidden">
+                        <img src="https://i.meee.com.tw/TcXiWkt.jpg" alt="電子レンジ調理器" class="w-full h-full object-cover">
+                        <div class="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg shadow-sm">
+                            <span class="text-[11px] font-bold text-teal">2200円</span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h3 class="text-[13px] font-bold text-slate-700 leading-tight mb-1">電子レンジ調理器</h3>
+                        <p class="text-[13px] text-slate-400">1台6役簡単に調理可能</p>
+                    </div>
+                </div>                
+
+                <div class="bg-white rounded-[20px] overflow-hidden shadow-[0_4px_15px_rgba(0,0,0,0.08)] border border-slate-50 flex flex-col">
+                    <div class="relative h-40 w-full overflow-hidden">
+                        <img src="https://i.meee.com.tw/eutax21.jpg" alt="電子レンジ調理器1.1L" class="w-full h-full object-cover">
+                        <div class="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg shadow-sm">
+                            <span class="text-[11px] font-bold text-teal">3520円</span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h3 class="text-[13px] font-bold text-slate-700 leading-tight mb-1">電子レンジ調理器1.1L</h3>
+                        <p class="text-[13px] text-slate-400">1台6役簡単に調理可能</p>
+                    </div>
+                </div>                
+
 
             </div>
         </div>        
@@ -2456,7 +2483,7 @@
         // SHOPPING分頁切換邏輯
         function switchTab(tab) {
             // 定義分頁名稱陣列
-            const tabs = ['cosme', 'coupons', 'snack'];
+            const tabs = ['cosme', 'coupons', 'goods'];
     
             // 遍歷所有分頁，進行切換
             tabs.forEach(t => {
